@@ -1,0 +1,23 @@
+name = "services_data"
+description = "List system services for the virtual desktop Services app."
+output_schema = "services-data-v1"
+app_ids = ["services"]
+app_role = "data"
+timeout_seconds = 15
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "linux-systemd"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+
+[[variants]]
+id = "windows-service-control"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

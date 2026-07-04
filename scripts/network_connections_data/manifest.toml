@@ -1,0 +1,25 @@
+name = "network_connections_data"
+description = "List network adapters and common connection settings for the virtual desktop Network Connections app."
+output_schema = "network-connections-data-v1"
+app_ids = ["network_connections"]
+app_role = "data"
+timeout_seconds = 45
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "linux"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
+default = false

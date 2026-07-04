@@ -1,0 +1,25 @@
+name = "network_connections_action"
+description = "Apply explicit network configuration changes requested from the Network Connections app."
+output_schema = "network-connections-action-v1"
+app_ids = ["network_connections"]
+app_role = "action"
+timeout_seconds = 60
+stream_policy = "json_action"
+max_stdout_bytes = 1048576
+max_stderr_bytes = 1048576
+max_decoded_bytes = 2097152
+requires_sudo = true
+audit_fields = ["network_action", "network_interface", "network_hostname", "network_mtu", "network_dns", "dry_run"]
+
+[[variants]]
+id = "linux"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

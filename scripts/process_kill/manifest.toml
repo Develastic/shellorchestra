@@ -1,0 +1,25 @@
+name = "process_kill"
+description = "Send a selected termination signal to a process from the virtual desktop Task Manager app."
+output_schema = "process-kill-v1"
+app_ids = ["process_monitor"]
+app_role = "action"
+timeout_seconds = 10
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+audit_fields = ["process_pid", "process_signal"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

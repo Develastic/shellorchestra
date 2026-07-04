@@ -1,0 +1,25 @@
+name = "backup_bucket_create"
+description = "Create and stamp a ShellOrchestra backup bucket under a selected root path."
+output_schema = "backup-bucket-probe-v1"
+app_ids = ["backup_manager"]
+app_role = "action"
+timeout_seconds = 60
+stream_policy = "json_action"
+max_stdout_bytes = 1048576
+max_stderr_bytes = 262144
+max_decoded_bytes = 2097152
+requires_sudo = true
+audit_fields = ["backup_root_path", "backup_bucket_label"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

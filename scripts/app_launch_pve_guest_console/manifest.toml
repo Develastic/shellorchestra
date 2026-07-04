@@ -1,0 +1,19 @@
+name = "app_launch_pve_guest_console"
+description = "Open a Proxmox VE guest console for a VM or container selected in Virtual Machines."
+output_schema = "terminal-app-v1"
+app_ids = ["pve_guest_console"]
+app_role = "launch"
+timeout_seconds = 10
+stream_policy = "terminal"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["pve_guest_type", "pve_vmid"]
+
+[[variants]]
+id = "linux-pve"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+default = true

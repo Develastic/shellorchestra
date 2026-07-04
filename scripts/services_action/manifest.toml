@@ -1,0 +1,24 @@
+name = "services_action"
+description = "Run a supported action against a selected systemd service."
+output_schema = "services-action-v1"
+app_ids = ["services"]
+app_role = "action"
+timeout_seconds = 30
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["service_name", "service_action"]
+
+[[variants]]
+id = "linux-systemd"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+
+[[variants]]
+id = "windows-service-control"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

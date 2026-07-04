@@ -1,0 +1,331 @@
+# Popular target OS distributions that ShellOrchestra intentionally supports.
+#
+# This catalog is a product/support contract, not a runtime fallback table.
+# Runtime script selection still uses explicit detected shell, platform, package
+# manager, and script manifests. If a target is not detected as expected,
+# ShellOrchestra must report that clearly instead of silently pretending that a
+# nearby distribution is the same.
+
+schema_version = 1
+
+[support_contract]
+macos_policy = "macOS is treated as one supported target distribution."
+windows_policy = "Windows client releases and Windows Server releases are tracked separately."
+proxmox_policy = "Proxmox VE is tracked as its own supported distribution, not as plain Debian."
+package_manager_policy = "Package actions use the detected official package manager only; no silent fallback to another ecosystem."
+
+[[distros]]
+id = "proxmox-ve"
+display_name = "Proxmox VE"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["debian"]
+detection_markers = ["pveversion", "/etc/pve"]
+support_tier = "primary"
+notes = "Detected and presented separately from Debian because Proxmox hosts have distinct operational semantics."
+
+[[distros]]
+id = "debian"
+display_name = "Debian GNU/Linux"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["debian"]
+support_tier = "primary"
+
+[[distros]]
+id = "ubuntu"
+display_name = "Ubuntu"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["ubuntu"]
+support_tier = "primary"
+
+[[distros]]
+id = "linux-mint"
+display_name = "Linux Mint"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["linuxmint"]
+support_tier = "supported"
+
+[[distros]]
+id = "raspberry-pi-os"
+display_name = "Raspberry Pi OS"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["raspbian"]
+architectures = ["armhf", "arm64", "aarch64"]
+support_tier = "supported"
+
+[[distros]]
+id = "pop-os"
+display_name = "Pop!_OS"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["pop"]
+support_tier = "supported"
+
+[[distros]]
+id = "kali"
+display_name = "Kali Linux"
+kind = "linux"
+family = "debian"
+package_managers = ["apt"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-apt"
+detection_ids = ["kali"]
+support_tier = "supported"
+
+[[distros]]
+id = "fedora"
+display_name = "Fedora Linux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["fedora"]
+support_tier = "primary"
+
+[[distros]]
+id = "rhel"
+display_name = "Red Hat Enterprise Linux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["rhel"]
+support_tier = "primary"
+
+[[distros]]
+id = "rocky"
+display_name = "Rocky Linux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["rocky"]
+support_tier = "primary"
+
+[[distros]]
+id = "almalinux"
+display_name = "AlmaLinux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["almalinux"]
+support_tier = "supported"
+
+[[distros]]
+id = "centos-stream"
+display_name = "CentOS Stream"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["centos"]
+support_tier = "supported"
+
+[[distros]]
+id = "oracle-linux"
+display_name = "Oracle Linux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["ol"]
+support_tier = "supported"
+
+[[distros]]
+id = "amazon-linux"
+display_name = "Amazon Linux"
+kind = "linux"
+family = "rhel"
+package_managers = ["dnf", "yum"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-dnf"
+detection_ids = ["amzn"]
+support_tier = "supported"
+
+[[distros]]
+id = "arch"
+display_name = "Arch Linux"
+kind = "linux"
+family = "arch"
+package_managers = ["pacman"]
+shells = ["posix", "bash", "zsh"]
+script_variant_family = "linux-pacman"
+detection_ids = ["arch"]
+support_tier = "primary"
+
+[[distros]]
+id = "manjaro"
+display_name = "Manjaro"
+kind = "linux"
+family = "arch"
+package_managers = ["pacman"]
+shells = ["posix", "bash", "zsh"]
+script_variant_family = "linux-pacman"
+detection_ids = ["manjaro"]
+support_tier = "supported"
+
+[[distros]]
+id = "endeavouros"
+display_name = "EndeavourOS"
+kind = "linux"
+family = "arch"
+package_managers = ["pacman"]
+shells = ["posix", "bash", "zsh"]
+script_variant_family = "linux-pacman"
+detection_ids = ["endeavouros"]
+support_tier = "supported"
+
+[[distros]]
+id = "alpine"
+display_name = "Alpine Linux"
+kind = "linux"
+family = "alpine"
+package_managers = ["apk"]
+shells = ["posix", "ash"]
+script_variant_family = "linux-apk"
+detection_ids = ["alpine"]
+support_tier = "primary"
+
+[[distros]]
+id = "opensuse-leap"
+display_name = "openSUSE Leap"
+kind = "linux"
+family = "suse"
+package_managers = ["zypper"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-zypper"
+detection_ids = ["opensuse-leap"]
+support_tier = "primary"
+
+[[distros]]
+id = "opensuse-tumbleweed"
+display_name = "openSUSE Tumbleweed"
+kind = "linux"
+family = "suse"
+package_managers = ["zypper"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-zypper"
+detection_ids = ["opensuse-tumbleweed"]
+support_tier = "primary"
+
+[[distros]]
+id = "sles"
+display_name = "SUSE Linux Enterprise Server"
+kind = "linux"
+family = "suse"
+package_managers = ["zypper"]
+shells = ["posix", "bash"]
+script_variant_family = "linux-zypper"
+detection_ids = ["sles", "sles_sap"]
+support_tier = "supported"
+
+[[distros]]
+id = "macos"
+display_name = "macOS"
+kind = "macos"
+family = "darwin"
+package_managers = ["brew"]
+shells = ["zsh", "bash", "posix"]
+script_variant_family = "macos-brew"
+detection_ids = ["darwin"]
+support_tier = "primary"
+notes = "All supported macOS releases are represented by this single target distribution entry."
+
+[[distros]]
+id = "windows-10"
+display_name = "Windows 10"
+kind = "windows"
+family = "windows-client"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-10"]
+support_tier = "primary"
+
+[[distros]]
+id = "windows-11"
+display_name = "Windows 11"
+kind = "windows"
+family = "windows-client"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-11"]
+support_tier = "primary"
+
+[[distros]]
+id = "windows-server-2016"
+display_name = "Windows Server 2016"
+kind = "windows"
+family = "windows-server"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-server-2016"]
+support_tier = "supported"
+notes = "Base management uses PowerShell/OpenSSH. Package actions require winget; ShellOrchestra must disable them clearly when winget is absent."
+
+[[distros]]
+id = "windows-server-2019"
+display_name = "Windows Server 2019"
+kind = "windows"
+family = "windows-server"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-server-2019"]
+support_tier = "supported"
+notes = "Base management uses PowerShell/OpenSSH. Package actions require winget; ShellOrchestra must disable them clearly when winget is absent."
+
+[[distros]]
+id = "windows-server-2022"
+display_name = "Windows Server 2022"
+kind = "windows"
+family = "windows-server"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-server-2022"]
+support_tier = "supported"
+notes = "Base management uses PowerShell/OpenSSH. Package actions require winget; ShellOrchestra must disable them clearly when winget is absent."
+
+[[distros]]
+id = "windows-server-2025"
+display_name = "Windows Server 2025"
+kind = "windows"
+family = "windows-server"
+package_managers = ["winget"]
+shells = ["powershell"]
+script_variant_family = "windows-winget"
+detection_ids = ["windows-server-2025"]
+support_tier = "supported"
+notes = "Base management uses PowerShell/OpenSSH. Package actions require winget; ShellOrchestra must disable them clearly when winget is absent."

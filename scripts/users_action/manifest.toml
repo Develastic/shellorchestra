@@ -1,0 +1,26 @@
+name = "users_action"
+description = "Create, edit, delete, manage local users, and update user SSH authorized keys for the virtual desktop Users app."
+output_schema = "users-action-v1"
+app_ids = ["users"]
+app_role = "action"
+timeout_seconds = 30
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["user_action", "user_name", "user_admin", "user_remove_home", "user_ssh_key", "user_group"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
+default = false

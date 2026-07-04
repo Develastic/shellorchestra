@@ -1,0 +1,25 @@
+name = "backup_source_scan"
+description = "Scan a backup source path and optionally apply gitignore-style exclude patterns."
+output_schema = "backup-source-scan-v1"
+app_ids = ["backup_manager"]
+app_role = "data"
+timeout_seconds = 180
+stream_policy = "json"
+max_stdout_bytes = 1048576
+max_stderr_bytes = 262144
+max_decoded_bytes = 2097152
+requires_sudo = false
+audit_fields = ["backup_source_path"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

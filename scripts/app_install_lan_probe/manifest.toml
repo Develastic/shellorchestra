@@ -1,0 +1,54 @@
+name = "app_install_lan_probe"
+description = "Install netcat/ncat for LAN Watch TCP banner probing using the detected target package manager."
+output_schema = "app-install-v1"
+app_ids = ["lan_watch"]
+app_role = "install"
+timeout_seconds = 900
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["app_id", "package_manager"]
+
+[[variants]]
+id = "linux-apt"
+file = "linux-apt.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["apt"]
+
+[[variants]]
+id = "linux-dnf"
+file = "linux-dnf.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["dnf"]
+
+[[variants]]
+id = "linux-yum"
+file = "linux-yum.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["yum"]
+
+[[variants]]
+id = "linux-pacman"
+file = "linux-pacman.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["pacman"]
+
+[[variants]]
+id = "linux-zypper"
+file = "linux-zypper.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["zypper"]
+
+[[variants]]
+id = "linux-apk"
+file = "linux-apk.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["apk"]

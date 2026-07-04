@@ -1,0 +1,29 @@
+name = "firewall_data"
+description = "Inspect supported firewall status and rules for the virtual desktop Firewall app."
+output_schema = "firewall-data-v1"
+app_ids = ["firewall"]
+app_role = "data"
+timeout_seconds = 10
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "linux-ufw"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+
+[[variants]]
+id = "macos-application-firewall"
+file = "macos.sh"
+shell = "posix"
+os = ["darwin"]
+
+[[variants]]
+id = "windows-netsecurity"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

@@ -1,0 +1,25 @@
+name = "containers_logs"
+description = "Read bounded stdout/stderr logs for one Docker or Podman container."
+output_schema = "containers-logs-v1"
+app_ids = ["containers"]
+app_role = "action"
+timeout_seconds = 30
+stream_policy = "json_action"
+max_stdout_bytes = 1048576
+max_stderr_bytes = 1048576
+max_decoded_bytes = 1048576
+requires_sudo = false
+audit_fields = ["container_engine", "container_id", "container_action", "container_logs_tail"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

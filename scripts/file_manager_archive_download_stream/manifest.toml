@@ -1,0 +1,22 @@
+name = "file_manager_archive_download_stream"
+description = "Stream a tar archive for File Manager Send To folder and multi-selection transfer."
+output_schema = "binary"
+app_ids = ["file_manager"]
+app_role = "data"
+timeout_seconds = 1800
+stream_policy = "binary_download"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+
+[[variants]]
+id = "windows-powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+default = true

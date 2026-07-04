@@ -1,0 +1,28 @@
+name = "status"
+description = "Collect basic host status telemetry."
+output_schema = "status-v2"
+timeout_seconds = 10
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "macos"
+file = "macos.sh"
+shell = "posix"
+os = ["darwin"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

@@ -1,0 +1,25 @@
+name = "users_data"
+description = "List local users for the virtual desktop Users app."
+output_schema = "users-data-v1"
+app_ids = ["users"]
+app_role = "data"
+timeout_seconds = 45
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
+default = false

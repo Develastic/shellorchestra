@@ -1,0 +1,19 @@
+name = "pve_manager_action"
+description = "Run an explicit Proxmox VE guest lifecycle action from the virtual desktop Virtual Machines app."
+output_schema = "pve-manager-action-v1"
+app_ids = ["pve_manager"]
+app_role = "action"
+timeout_seconds = 45
+stream_policy = "json_action"
+requires_sudo = true
+audit_fields = ["pve_action", "pve_guest_type", "pve_vmid"]
+max_stdout_bytes = 1048576
+max_stderr_bytes = 262144
+max_decoded_bytes = 1048576
+
+[[variants]]
+id = "linux-pve"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+default = true

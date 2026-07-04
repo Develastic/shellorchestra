@@ -1,0 +1,23 @@
+name = "ssh_server_data"
+description = "Inspect OpenSSH server configuration, trusted user CAs, Match blocks, and risky access settings for the SSH Server virtual desktop app."
+output_schema = "ssh-server-data-v1"
+app_ids = ["ssh_server"]
+app_role = "data"
+timeout_seconds = 20
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "posix-openssh"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+
+[[variants]]
+id = "windows-openssh"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

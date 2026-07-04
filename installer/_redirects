@@ -1,0 +1,8 @@
+/ /install-posix.sh 200
+/ca /install-posix.sh 200
+/install.sh /install-posix.sh 200
+/hash /install-posix.sh.sha256 200
+/install.ps1 /install-windows.ps1 200
+/ps1 /install-windows.ps1 200
+/install.ps1.sha256 /install-windows.ps1.sha256 200
+/ps1/hash /install-windows.ps1.sha256 200

@@ -1,0 +1,68 @@
+name = "packages_metadata_update"
+description = "Refresh package-manager repository metadata without upgrading packages."
+output_schema = "packages-metadata-update-v1"
+app_ids = ["package_manager"]
+app_role = "action"
+timeout_seconds = 900
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["package_manager", "dry_run"]
+
+[[variants]]
+id = "linux-apt"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["apt"]
+
+[[variants]]
+id = "linux-apk"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["apk"]
+
+[[variants]]
+id = "linux-dnf"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["dnf"]
+
+[[variants]]
+id = "linux-yum"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["yum"]
+
+[[variants]]
+id = "linux-pacman"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["pacman"]
+
+[[variants]]
+id = "linux-zypper"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+package_managers = ["zypper"]
+
+[[variants]]
+id = "macos-brew"
+file = "posix.sh"
+shell = "posix"
+os = ["darwin"]
+package_managers = ["brew"]
+
+[[variants]]
+id = "windows-winget"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
+package_managers = ["winget"]

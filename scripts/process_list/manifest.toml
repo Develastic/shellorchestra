@@ -1,0 +1,24 @@
+name = "process_list"
+description = "Collect a compact process list for the virtual desktop Process Monitor app."
+output_schema = "process-list-v1"
+app_ids = ["process_monitor"]
+app_role = "data"
+timeout_seconds = 10
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

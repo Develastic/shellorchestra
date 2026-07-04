@@ -1,0 +1,24 @@
+name = "app_launch_custom_terminal"
+description = "Launch a user-defined custom terminal shortcut."
+output_schema = "terminal-app-v1"
+app_ids = ["custom_terminal"]
+app_role = "launch"
+timeout_seconds = 10
+stream_policy = "terminal"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

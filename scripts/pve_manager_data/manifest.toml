@@ -1,0 +1,18 @@
+name = "pve_manager_data"
+description = "List Proxmox VE guests for the virtual desktop Virtual Machines app."
+output_schema = "pve-manager-data-v1"
+app_ids = ["pve_manager"]
+app_role = "data"
+timeout_seconds = 20
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "linux-pve"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+default = true

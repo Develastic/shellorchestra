@@ -1,0 +1,24 @@
+name = "ssh_server_action"
+description = "Validate, apply, or roll back OpenSSH server config changes for the SSH Server virtual desktop app."
+output_schema = "ssh-server-action-v1"
+app_ids = ["ssh_server"]
+app_role = "action"
+timeout_seconds = 30
+stream_policy = "json_action"
+requires_sudo = true
+audit_fields = ["ssh_server_action", "ssh_server_path", "ssh_server_expected_hash", "ssh_server_backup_path"]
+max_stdout_bytes = 1048576
+max_stderr_bytes = 1048576
+max_decoded_bytes = 2097152
+
+[[variants]]
+id = "posix-openssh"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+
+[[variants]]
+id = "windows-openssh"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

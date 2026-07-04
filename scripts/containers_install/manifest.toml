@@ -1,0 +1,25 @@
+name = "containers_install"
+description = "Preview or install a ShellOrchestra-approved containerized app through Docker or Podman."
+output_schema = "containers-install-v1"
+app_ids = ["containers"]
+app_role = "install"
+timeout_seconds = 300
+stream_policy = "json_action"
+max_stdout_bytes = 2097152
+max_stderr_bytes = 2097152
+max_decoded_bytes = 2097152
+requires_sudo = false
+audit_fields = ["container_engine", "container_action", "container_install_template", "container_install_image", "container_install_name", "container_install_bind_address", "container_install_host_port", "container_install_container_port", "container_install_restart_policy", "dry_run"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

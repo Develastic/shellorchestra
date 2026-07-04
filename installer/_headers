@@ -1,0 +1,49 @@
+/*
+  Access-Control-Allow-Origin: *
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=300
+
+/v1/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/install-posix.sh
+  Content-Type: text/x-shellscript; charset=utf-8
+
+/
+  Content-Type: text/x-shellscript; charset=utf-8
+
+/ca
+  Content-Type: text/x-shellscript; charset=utf-8
+
+/install.sh
+  Content-Type: text/x-shellscript; charset=utf-8
+
+/install-posix.sh.sha256
+  Content-Type: text/plain; charset=utf-8
+
+/install-windows.ps1
+  Content-Type: text/plain; charset=utf-8
+
+/install.ps1
+  Content-Type: text/plain; charset=utf-8
+
+/install-windows.ps1.sha256
+  Content-Type: text/plain; charset=utf-8
+
+/install.ps1.sha256
+  Content-Type: text/plain; charset=utf-8
+
+/hash
+  Content-Type: text/plain; charset=utf-8
+
+/v1/install-posix.sh
+  Content-Type: text/x-shellscript; charset=utf-8
+
+/v1/install-posix.sh.sha256
+  Content-Type: text/plain; charset=utf-8
+
+/v1/install-windows.ps1
+  Content-Type: text/plain; charset=utf-8
+
+/v1/install-windows.ps1.sha256
+  Content-Type: text/plain; charset=utf-8

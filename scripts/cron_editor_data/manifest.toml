@@ -1,0 +1,18 @@
+name = "cron_editor_data"
+description = "List users and read user crontabs for the virtual desktop Cron Editor app."
+output_schema = "cron-editor-data-v1"
+app_ids = ["cron_editor"]
+app_role = "data"
+timeout_seconds = 20
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true

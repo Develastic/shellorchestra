@@ -1,0 +1,25 @@
+name = "file_manager_data"
+description = "File manager locations, directory listing, preview, editor read/write, and remote file operations."
+output_schema = "file-manager-data-v2"
+app_ids = ["file_manager", "editor"]
+app_role = "data"
+timeout_seconds = 20
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+audit_fields = ["file_manager_action", "file_manager_path", "file_manager_destination_path", "file_manager_new_name", "file_manager_mode", "file_manager_overwrite", "file_manager_archive_format", "file_manager_search_name_mode", "file_manager_search_content_mode", "file_manager_search_case_sensitive", "file_manager_search_skip_binary", "file_manager_search_stay_filesystem", "file_manager_search_include_hidden", "file_manager_search_max_results", "file_manager_search_max_file_bytes"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

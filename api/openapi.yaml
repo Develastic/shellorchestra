@@ -1,0 +1,3529 @@
+openapi: 3.1.0
+info:
+  title: ShellOrchestra API
+  version: 0.1.0
+servers:
+  - url: /api
+security:
+  - cookieAuth: []
+paths:
+  /healthz:
+    get:
+      security: []
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service health
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /bootstrap/state:
+    get:
+      security: []
+      operationId: getBootstrapState
+      responses:
+        '200':
+          description: Bootstrap state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BootstrapState'
+  /auth/me:
+    get:
+      operationId: getCurrentPrincipal
+      responses:
+        '200':
+          description: Current authenticated principal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Principal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /auth/logout:
+    post:
+      operationId: logout
+      responses:
+        '204':
+          description: Logged out
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /auth/device-signing-key:
+    post:
+      operationId: registerDeviceSigningKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceSigningKeyRequest'
+      responses:
+        '200':
+          description: Device request signing key registered for the current authenticated session.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [device_id, registered]
+                properties:
+                  device_id:
+                    type: string
+                  registered:
+                    type: boolean
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /auth/device-envelope-key:
+    post:
+      operationId: registerDeviceEnvelopeKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceEnvelopeKeyRequest'
+      responses:
+        '200':
+          description: Device key-delivery public key registered for the current authenticated session.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [device_id, registered, envelope_public_key_spki_b64, key_share_refreshed, key_share_refresh_message]
+                properties:
+                  device_id:
+                    type: string
+                  registered:
+                    type: boolean
+                  envelope_public_key_spki_b64:
+                    type: string
+                  key_share_refreshed:
+                    type: boolean
+                    description: Whether the currently unlocked CA signer refreshed this device's encrypted server-access key share for the submitted envelope key.
+                  key_share_refresh_message:
+                    type: string
+                    description: Human-readable diagnostic for the key-share refresh attempt.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /auth/debug/login:
+    post:
+      security: []
+      operationId: debugLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebugLoginRequest'
+      responses:
+        '200':
+          description: Debug session created for an allowed client IP.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyLoginFinishResponse'
+  /debug/client-events:
+    post:
+      operationId: postDebugClientEvents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebugClientEventsRequest'
+      responses:
+        '202':
+          description: Debug client events accepted.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [stored]
+                properties:
+                  stored:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Debug support is not available or not enabled.
+  /debug/runtime-unlock:
+    post:
+      operationId: debugRuntimeUnlock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebugLoginRequest'
+      responses:
+        '200':
+          description: Debug-only server-access unlock completed using the protected debug key-share vault.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeLockState'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Debug support is not available or not enabled.
+        '409':
+          description: Debug server-access key share is not available yet.
+  /auth/passkey/register/begin:
+    post:
+      security: []
+      operationId: beginPasskeyRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyRegistrationBeginRequest'
+      responses:
+        '200':
+          description: Passkey registration options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyBeginResponse'
+  /auth/passkey/register/finish:
+    post:
+      security: []
+      operationId: finishPasskeyRegistration
+      parameters:
+        - $ref: '#/components/parameters/CeremonyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Registered and authenticated device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyRegistrationFinishResponse'
+  /auth/passkey/login/begin:
+    post:
+      security: []
+      operationId: beginPasskeyLogin
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasskeyLoginBeginRequest'
+      responses:
+        '200':
+          description: Passkey login options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyBeginResponse'
+  /auth/passkey/login/finish:
+    post:
+      security: []
+      operationId: finishPasskeyLogin
+      parameters:
+        - $ref: '#/components/parameters/CeremonyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Authenticated device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyLoginFinishResponse'
+  /auth/device-requests/register/begin:
+    post:
+      security: []
+      operationId: beginDeviceAuthorizationRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRequestBeginRequest'
+      responses:
+        '200':
+          description: New-device passkey registration options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasskeyBeginResponse'
+  /auth/device-requests/register/finish:
+    post:
+      security: []
+      operationId: finishDeviceAuthorizationRequest
+      parameters:
+        - $ref: '#/components/parameters/CeremonyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: New-device authorization request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceRequestCreated'
+  /auth/device-requests/{requestId}/status:
+    post:
+      security: []
+      operationId: getDeviceAuthorizationRequestStatus
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRequestStatusRequest'
+      responses:
+        '200':
+          description: New-device authorization request status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceRequestStatus'
+  /device-requests:
+    get:
+      operationId: listDeviceAuthorizationRequests
+      responses:
+        '200':
+          description: Pending device authorization requests
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [requests]
+                properties:
+                  requests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DeviceAuthorizationRequest'
+  /device-requests/{requestId}/approve:
+    post:
+      operationId: approveDeviceAuthorizationRequest
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRequestApproveRequest'
+      responses:
+        '200':
+          description: Device authorization request approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceAuthorizationRequest'
+  /device-requests/{requestId}/deny:
+    post:
+      operationId: denyDeviceAuthorizationRequest
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Device authorization request denied
+  /auth/lan/setup/begin:
+    post:
+      security: []
+      operationId: beginLanOnlySetup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LANSetupBeginRequest'
+      responses:
+        '200':
+          description: LAN-only authenticator setup details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LANSetupBeginResponse'
+  /auth/lan/setup/finish:
+    post:
+      security: []
+      operationId: finishLanOnlySetup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LANSetupFinishRequest'
+      responses:
+        '200':
+          description: LAN-only setup completed and authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LANAuthResponse'
+  /auth/lan/login:
+    post:
+      security: []
+      operationId: loginLanOnly
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LANLoginRequest'
+      responses:
+        '200':
+          description: LAN-only admin authenticated and runtime unlocked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LANAuthResponse'
+  /devices:
+    get:
+      operationId: listClientDevices
+      responses:
+        '200':
+          description: Authorized client devices and their server-access key readiness.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDevicesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /devices/{device_id}/revoke:
+    post:
+      operationId: revokeClientDevice
+      parameters:
+        - name: device_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Device authorization revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevokeClientDeviceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Device not found
+        '409':
+          description: Device cannot be revoked from this screen
+  /runtime/lock-state:
+    get:
+      operationId: getRuntimeLockState
+      responses:
+        '200':
+          description: Runtime lock state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeLockState'
+  /runtime/lock:
+    post:
+      operationId: lockRuntime
+      responses:
+        '200':
+          description: Runtime locked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeLockState'
+  /runtime/unlock:
+    post:
+      operationId: unlockRuntime
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlockRequest'
+      responses:
+        '200':
+          description: Runtime unlocked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuntimeLockState'
+  /keys/status:
+    get:
+      operationId: getKeysStatus
+      responses:
+        '200':
+          description: Server access key authority status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysStatus'
+  /keys/create:
+    post:
+      operationId: createKeys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeysCreateRequest'
+      responses:
+        '200':
+          description: Server access key authority created or rotated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeysCreateResponse'
+  /keys/change-approvals:
+    post:
+      operationId: beginKeyChangeApproval
+      responses:
+        '200':
+          description: Phone approval request for a server-access key change
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyChangeApprovalBegin'
+  /keys/change-approvals/{request_id}/status:
+    post:
+      operationId: getKeyChangeApprovalStatus
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyChangeApprovalStatusRequest'
+      responses:
+        '200':
+          description: Current phone approval state for a server-access key change
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyChangeApprovalStatus'
+  /keys/change-approvals/{request_id}/approve:
+    post:
+      operationId: approveKeyChange
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Phone approval accepted for a server-access key change
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyChangeApprovalStatus'
+  /keys/device-share:
+    get:
+      operationId: getCurrentDeviceKeyShare
+      responses:
+        '200':
+          description: Encrypted key share for the current device and active authority epoch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentDeviceKeyShare'
+  /keys/device-shares:
+    post:
+      operationId: storeDeviceKeyShares
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceKeySharesRequest'
+      responses:
+        '200':
+          description: Encrypted device key shares stored
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceKeySharesResponse'
+  /keys/current-device-share:
+    post:
+      operationId: storeCurrentDeviceKeyShare
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrentDeviceShareRequest'
+      responses:
+        '200':
+          description: Encrypted current server-access key share stored for the authenticated device.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [stored, active_epoch, device_id]
+                properties:
+                  stored:
+                    type: boolean
+                  active_epoch:
+                    type: integer
+                  device_id:
+                    type: string
+  /system/version-check:
+    get:
+      operationId: getSystemVersionCheck
+      responses:
+        '200':
+          description: Signed release update check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemVersionCheck'
+  /system/upgrade:
+    post:
+      operationId: startSystemUpgrade
+      responses:
+        '202':
+          description: Local updater accepted the upgrade request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemUpgradeStartResponse'
+        '409':
+          description: One-click upgrade is unavailable or no update is pending
+  /system/upgrade/jobs/{job_id}:
+    get:
+      operationId: getSystemUpgradeJob
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Local updater job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemUpgradeJob'
+        '404':
+          description: Updater job was not found
+  /settings/ui:
+    get:
+      operationId: getUISettings
+      responses:
+        '200':
+          description: UI settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UISettings'
+    put:
+      operationId: updateUISettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UISettingsInput'
+      responses:
+        '200':
+          description: Updated UI settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UISettings'
+  /settings/security/ssh:
+    get:
+      operationId: getSSHSecuritySettings
+      responses:
+        '200':
+          description: SSH security settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHSecuritySettings'
+    put:
+      operationId: updateSSHSecuritySettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHSecuritySettingsInput'
+      responses:
+        '200':
+          description: Updated SSH security settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHSecuritySettings'
+  /settings/wallpaper/custom:
+    get:
+      operationId: getCustomWallpaper
+      responses:
+        '200':
+          description: Custom wallpaper image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+    post:
+      operationId: uploadCustomWallpaper
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [wallpaper]
+              properties:
+                wallpaper:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Updated UI settings after wallpaper upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UISettings'
+  /server-tools/backend:
+    get:
+      operationId: getBackendToolsStatus
+      responses:
+        '200':
+          description: ShellOrchestra internal service telemetry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendToolsStatus'
+  /server-tools/backend/restart:
+    post:
+      operationId: restartBackendServices
+      responses:
+        '409':
+          description: Backend restart requires a separate supervisor service
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /servers:
+    get:
+      operationId: listServers
+      responses:
+        '200':
+          description: Servers
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [servers]
+                properties:
+                  servers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Server'
+    post:
+      operationId: createServer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerInput'
+      responses:
+        '201':
+          description: Created server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+  /servers/import-ssh-config/scan:
+    post:
+      operationId: scanSSHConfigSources
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHConfigSourceScanRequest'
+      responses:
+        '200':
+          description: Detected local SSH profile sources and import candidates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHConfigSourceScanResult'
+  /servers/import-ssh-config:
+    post:
+      operationId: importSSHConfig
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHConfigImportRequest'
+      responses:
+        '200':
+          description: SSH config import result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHConfigImportResult'
+  /servers/test-tcp:
+    post:
+      operationId: testServerTCP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerWizardRequest'
+      responses:
+        '200':
+          description: TCP reachability test result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerTCPTestResult'
+  /servers/test-auth:
+    post:
+      operationId: testServerAuth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerWizardRequest'
+      responses:
+        '200':
+          description: SSH authentication test result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerAuthTestResult'
+  /servers/detect-facts:
+    post:
+      operationId: detectServerFacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerWizardRequest'
+      responses:
+        '200':
+          description: Server facts detected over SSH
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerFacts'
+  /servers/actions/packages-upgrade:
+    post:
+      operationId: runPackageUpgradeOnServers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerBatchActionRequest'
+      responses:
+        '202':
+          description: Package upgrade runs accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerBatchActionResponse'
+  /servers/actions/reboot:
+    post:
+      operationId: runRebootOnServers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerBatchActionRequest'
+      responses:
+        '202':
+          description: Reboot runs accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerBatchActionResponse'
+  /desktops/{serverId}:
+    get:
+      operationId: getVirtualDesktop
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      responses:
+        '200':
+          description: Virtual desktop state for a server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDesktopState'
+    put:
+      operationId: saveVirtualDesktop
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualDesktopSaveRequest'
+      responses:
+        '200':
+          description: Saved virtual desktop state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDesktopState'
+        '409':
+          description: Virtual desktop was changed by another trusted device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDesktopSaveConflict'
+  /desktop-wallpapers:
+    get:
+      operationId: listVirtualDesktopWallpapers
+      responses:
+        '200':
+          description: Custom virtual desktop wallpaper library
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDesktopWallpaperList'
+    post:
+      operationId: uploadVirtualDesktopWallpaper
+      parameters:
+        - name: label
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          image/png:
+            schema:
+              type: string
+              format: binary
+          image/jpeg:
+            schema:
+              type: string
+              format: binary
+          image/webp:
+            schema:
+              type: string
+              format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Uploaded custom virtual desktop wallpaper
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualDesktopWallpaper'
+  /desktop-wallpapers/{wallpaperId}:
+    get:
+      operationId: getVirtualDesktopWallpaperImage
+      parameters:
+        - $ref: '#/components/parameters/WallpaperId'
+      responses:
+        '200':
+          description: Custom virtual desktop wallpaper image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+    delete:
+      operationId: deleteVirtualDesktopWallpaper
+      parameters:
+        - $ref: '#/components/parameters/WallpaperId'
+      responses:
+        '204':
+          description: Custom virtual desktop wallpaper deleted
+  /desktop-apps:
+    get:
+      operationId: listDesktopApps
+      parameters:
+        - name: server_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Virtual desktop application profiles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesktopAppListResponse'
+  /desktop-apps/{appId}/launch:
+    post:
+      operationId: launchDesktopApp
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesktopAppLaunchRequest'
+      responses:
+        '200':
+          description: Desktop app launched as a terminal window
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesktopAppLaunchResponse'
+  /desktop-apps/{appId}/install:
+    post:
+      operationId: installDesktopApp
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesktopAppInstallRequest'
+      responses:
+        '202':
+          description: Desktop app install script accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesktopAppInstallResponse'
+  /desktop-apps/{appId}/action:
+    post:
+      operationId: runDesktopAppAction
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesktopAppActionRequest'
+      responses:
+        '202':
+          description: Desktop app action script accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesktopAppActionResponse'
+  /desktop-apps/{appId}/data:
+    post:
+      operationId: runDesktopAppData
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesktopAppDataRequest'
+      responses:
+        '200':
+          description: Desktop app data returned from an external script profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesktopAppDataResponse'
+  /desktop-apps/{appId}/data-stream:
+    post:
+      operationId: streamDesktopAppData
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DesktopAppDataRequest'
+      responses:
+        '200':
+          description: Desktop app read-only data streamed as NDJSON events from the shared remote stream framework
+          content:
+            application/x-ndjson:
+              schema:
+                type: string
+                description: Newline-delimited JSON events. A result event contains DesktopAppDataResponse-shaped data.
+  /file-versions:
+    get:
+      operationId: listFileVersions
+      parameters:
+        - name: server_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File version history for one remote file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileVersionListResponse'
+  /file-versions/{versionId}:
+    get:
+      operationId: getFileVersion
+      parameters:
+        - name: versionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: One stored file version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileVersionContent'
+  /audit/head:
+    get:
+      operationId: getAuditHead
+      responses:
+        '200':
+          description: Current tamper-evident audit chain head
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditHead'
+  /audit/verify:
+    get:
+      operationId: verifyAuditChain
+      responses:
+        '200':
+          description: Audit chain verification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditVerifyResult'
+  /terminals:
+    post:
+      operationId: createTerminalSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminalCreateRequest'
+      responses:
+        '200':
+          description: Created terminal session snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminalSnapshot'
+  /terminals/{sessionId}/snapshot:
+    get:
+      operationId: getTerminalSnapshot
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Terminal pane snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminalSnapshot'
+  /terminals/{sessionId}/stream-ticket:
+    post:
+      operationId: createTerminalStreamTicket
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '200':
+          description: Short-lived terminal stream ticket issued
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [token, expires_at]
+                properties:
+                  token:
+                    type: string
+                  expires_at:
+                    type: string
+                    format: date-time
+  /terminals/{sessionId}/input:
+    post:
+      operationId: sendTerminalInput
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminalInputRequest'
+      responses:
+        '204':
+          description: Input accepted
+  /terminals/{sessionId}/resize:
+    post:
+      operationId: resizeTerminal
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminalResizeRequest'
+      responses:
+        '200':
+          description: Resized terminal snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminalSnapshot'
+  /terminals/{sessionId}/close:
+    post:
+      operationId: closeTerminal
+      parameters:
+        - $ref: '#/components/parameters/SessionId'
+      responses:
+        '204':
+          description: Terminal closed
+  /ssh-user-keys:
+    get:
+      operationId: listSSHUserKeys
+      responses:
+        '200':
+          description: Imported user SSH keys
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [keys]
+                properties:
+                  keys:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SSHUserKey'
+    post:
+      operationId: createSSHUserKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSHUserKeyCreateRequest'
+      responses:
+        '201':
+          description: Imported SSH key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SSHUserKey'
+  /servers/{serverId}:
+    put:
+      operationId: updateServer
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerInput'
+      responses:
+        '200':
+          description: Updated server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+    delete:
+      operationId: deleteServer
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      responses:
+        '204':
+          description: Deleted server
+  /servers/{serverId}/bootstrap-command:
+    post:
+      operationId: buildServerBootstrapCommand
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      responses:
+        '200':
+          description: Bootstrap command
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BootstrapCommand'
+  /servers/{serverId}/host-keys/scan:
+    post:
+      operationId: scanServerHostKeys
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      responses:
+        '200':
+          description: Current SSH server host keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostKeyScanResult'
+  /servers/{serverId}/host-keys/accept:
+    post:
+      operationId: acceptServerHostKeys
+      parameters:
+        - $ref: '#/components/parameters/ServerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostKeyAcceptRequest'
+      responses:
+        '200':
+          description: Server with replaced trusted host keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+  /status:
+    get:
+      operationId: listServerStatuses
+      responses:
+        '200':
+          description: Server statuses
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [statuses]
+                properties:
+                  statuses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ServerStatus'
+  /scripts:
+    get:
+      operationId: listScripts
+      responses:
+        '200':
+          description: Script catalog
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [commands, system_scripts]
+                properties:
+                  commands:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScriptCommand'
+                  system_scripts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SystemScriptSource'
+  /scripts/{command}/run:
+    post:
+      operationId: runScript
+      parameters:
+        - name: command
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunScriptRequest'
+      responses:
+        '202':
+          description: Script run accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptRun'
+  /script-runs/{runId}:
+    get:
+      operationId: getScriptRun
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+      responses:
+        '200':
+          description: Script run status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptRun'
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: shellorchestra_access
+  parameters:
+    ServerId:
+      name: serverId
+      in: path
+      required: true
+      schema:
+        type: string
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema:
+        type: string
+    AppId:
+      name: appId
+      in: path
+      required: true
+      schema:
+        type: string
+    WallpaperId:
+      name: wallpaperId
+      in: path
+      required: true
+      schema:
+        type: string
+    RunId:
+      name: runId
+      in: path
+      required: true
+      schema:
+        type: string
+    CeremonyId:
+      name: ceremony_id
+      in: query
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Request is not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+    HealthResponse:
+      type: object
+      required: [ok, service]
+      properties:
+        ok:
+          type: boolean
+        service:
+          type: string
+    BootstrapState:
+      type: object
+      required: [state, app_version, app_edition, runtime_session_id, timeout_minutes, debug_supported, debug_enabled, windows_desktop_server, local_protected_key_available]
+      properties:
+        state:
+          type: string
+          enum: [open, expired, complete]
+        app_version:
+          type: string
+        app_edition:
+          type: string
+          enum: [community, pro, business, enterprise]
+        runtime_session_id:
+          type: string
+        auth_mode:
+          type: string
+          enum: [unset, passkey, lan_totp]
+        passkey_origin:
+          type: string
+          nullable: true
+        current_origin:
+          type: string
+        timeout_minutes:
+          type: integer
+        qr_url:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        debug_supported:
+          type: boolean
+        debug_enabled:
+          type: boolean
+        windows_desktop_server:
+          type: boolean
+        local_protected_key_available:
+          type: boolean
+        debug_feedback:
+          type: object
+          properties:
+            submit_url:
+              type: string
+              nullable: true
+            project:
+              type: string
+              nullable: true
+            local_storage_enabled:
+              type: boolean
+    Principal:
+      type: object
+      required: [device_id, label, kind, can_approve_device_requests, session_idle_timeout_seconds]
+      properties:
+        device_id:
+          type: string
+        label:
+          type: string
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        can_approve_device_requests:
+          type: boolean
+          description: True only for the first approved phone that may review and approve new-device requests.
+        session_idle_timeout_seconds:
+          type: integer
+          description: Current browser inactivity timeout in seconds.
+    DebugLoginRequest:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: Debug login token. Send in JSON body; never place this token in query parameters.
+    DebugClientEventsRequest:
+      type: object
+      required: [source, events]
+      properties:
+        source:
+          type: string
+        events:
+          type: array
+          maxItems: 50
+          items:
+            type: object
+            required: [at, step, message]
+            properties:
+              at:
+                type: string
+              step:
+                type: string
+              message:
+                type: string
+              details:
+                type: object
+                additionalProperties: true
+    DeviceSigningKeyRequest:
+      type: object
+      required: [public_key_spki_b64]
+      properties:
+        public_key_spki_b64:
+          type: string
+          description: Base64 DER SPKI public key for passive browser-side request signatures.
+    DeviceEnvelopeKeyRequest:
+      type: object
+      required: [envelope_public_key_spki_b64]
+      properties:
+        envelope_public_key_spki_b64:
+          type: string
+          description: Base64 DER SPKI RSA-OAEP public key used to deliver encrypted server-access key shares to this browser.
+    PasskeyRegistrationBeginRequest:
+      type: object
+      required: [label, kind]
+      properties:
+        label:
+          type: string
+          minLength: 1
+          maxLength: 120
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        bootstrap_token:
+          type: string
+          nullable: true
+          description: One-time first-start QR token required before any approved device exists.
+        envelope_public_key_spki_b64:
+          type: string
+          nullable: true
+          description: Device key-delivery public key used later to deliver encrypted server-access key shares.
+    PasskeyLoginBeginRequest:
+      type: object
+      properties:
+        device_id:
+          type: string
+          nullable: true
+          description: Local trusted device id remembered by this browser. Used to keep allowCredentials scoped to this device.
+        credential_id:
+          type: string
+          nullable: true
+          description: Local trusted passkey credential id remembered by this browser.
+    PasskeyBeginResponse:
+      type: object
+      required: [ceremony_id, options, expires_at]
+      properties:
+        ceremony_id:
+          type: string
+        options:
+          type: object
+          additionalProperties: true
+        expires_at:
+          type: string
+          format: date-time
+    PasskeyRegistrationFinishResponse:
+      type: object
+      required: [principal]
+      properties:
+        principal:
+          $ref: '#/components/schemas/Principal'
+        credential_id:
+          type: string
+          nullable: true
+        device_share_b64:
+          type: string
+          nullable: true
+        public_key:
+          type: string
+          nullable: true
+    PasskeyLoginFinishResponse:
+      type: object
+      required: [principal]
+      properties:
+        principal:
+          $ref: '#/components/schemas/Principal'
+        credential_id:
+          type: string
+          nullable: true
+    DeviceRequestBeginRequest:
+      type: object
+      required: [label, kind, envelope_public_key_spki_b64]
+      properties:
+        label:
+          type: string
+          minLength: 1
+          maxLength: 120
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        envelope_public_key_spki_b64:
+          type: string
+          description: New-device encryption public key used by an approved device to encrypt the approval share.
+    DeviceRequestCreated:
+      type: object
+      required: [request_id, poll_token, verification_code, state, expires_at]
+      properties:
+        request_id:
+          type: string
+        poll_token:
+          type: string
+        verification_code:
+          type: string
+        state:
+          type: string
+          enum: [pending]
+        expires_at:
+          type: string
+          format: date-time
+    DeviceRequestStatusRequest:
+      type: object
+      required: [poll_token]
+      properties:
+        poll_token:
+          type: string
+          description: Polling secret returned to the requesting browser. Sent in the request body so it is not exposed in the browser URL.
+    DeviceRequestStatus:
+      type: object
+      required: [request_id, state, verification_code, expires_at]
+      properties:
+        request_id:
+          type: string
+        state:
+          type: string
+          enum: [pending, approved, denied]
+        verification_code:
+          type: string
+        encrypted_device_share_b64:
+          type: string
+          nullable: true
+        device_id:
+          type: string
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+          nullable: true
+        credential_id:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+    DeviceAuthorizationRequest:
+      type: object
+      required: [id, label, kind, verification_code, envelope_public_key_spki_b64, state, created_at, expires_at]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        verification_code:
+          type: string
+        envelope_public_key_spki_b64:
+          type: string
+        state:
+          type: string
+          enum: [pending, approved, denied]
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+    DeviceRequestApproveRequest:
+      type: object
+      required: [encrypted_device_share_b64]
+      properties:
+        encrypted_device_share_b64:
+          type: string
+    LANSetupBeginRequest:
+      type: object
+      required: [bootstrap_token]
+      properties:
+        bootstrap_token:
+          type: string
+    LANSetupBeginResponse:
+      type: object
+      required: [secret, otpauth_url, expires_at]
+      properties:
+        secret:
+          type: string
+        otpauth_url:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+    LANSetupFinishRequest:
+      type: object
+      required: [bootstrap_token, passphrase, totp_code]
+      properties:
+        bootstrap_token:
+          type: string
+        passphrase:
+          type: string
+          minLength: 12
+        totp_code:
+          type: string
+          minLength: 6
+          maxLength: 12
+    LANLoginRequest:
+      type: object
+      required: [passphrase, totp_code]
+      properties:
+        passphrase:
+          type: string
+        totp_code:
+          type: string
+          minLength: 6
+          maxLength: 12
+    LANAuthResponse:
+      type: object
+      required: [principal, lock_state]
+      properties:
+        principal:
+          $ref: '#/components/schemas/Principal'
+        lock_state:
+          $ref: '#/components/schemas/RuntimeLockState'
+        public_key:
+          type: string
+          nullable: true
+    ClientDevicesResponse:
+      type: object
+      required: [devices, current_device_id, key_authority_initialized, active_epoch, auth_mode]
+      properties:
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientDevice'
+        current_device_id:
+          type: string
+        key_authority_initialized:
+          type: boolean
+        active_epoch:
+          type: integer
+        auth_mode:
+          type: string
+          enum: [unset, passkey, lan_totp]
+    ClientDevice:
+      type: object
+      required: [device_id, label, kind, current_device, can_approve_new_devices, can_revoke, active_session_count, passkey_ready, request_protection_ready, key_distribution]
+      properties:
+        device_id:
+          type: string
+        label:
+          type: string
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        current_device:
+          type: boolean
+        can_approve_new_devices:
+          type: boolean
+        can_revoke:
+          type: boolean
+        revoke_blocker:
+          type: string
+          nullable: true
+        approved_at:
+          type: string
+          format: date-time
+          nullable: true
+        last_login_at:
+          type: string
+          format: date-time
+          nullable: true
+        last_login_ip:
+          type: string
+          nullable: true
+        active_session_count:
+          type: integer
+        passkey_ready:
+          type: boolean
+        request_protection_ready:
+          type: boolean
+        key_distribution:
+          $ref: '#/components/schemas/ClientDeviceKeyDistribution'
+    RevokeClientDeviceResponse:
+      type: object
+      required: [device_id, revoked, message]
+      properties:
+        device_id:
+          type: string
+        revoked:
+          type: boolean
+        message:
+          type: string
+    ClientDeviceKeyDistribution:
+      type: object
+      required: [status, label, detail, device_epoch, active_epoch]
+      properties:
+        status:
+          type: string
+          enum: [current, add_again, outdated, missing, not_configured, not_required]
+        label:
+          type: string
+        detail:
+          type: string
+        device_epoch:
+          type: integer
+        active_epoch:
+          type: integer
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+    RuntimeLockState:
+      type: object
+      required: [locked, initialized, message]
+      properties:
+        locked:
+          type: boolean
+        initialized:
+          type: boolean
+        message:
+          type: string
+    UnlockRequest:
+      type: object
+      required: [device_share_b64]
+      properties:
+        device_share_b64:
+          type: string
+    KeyDevice:
+      type: object
+      required: [device_id, label, kind, signer_epoch, envelope_key_available]
+      properties:
+        device_id:
+          type: string
+        label:
+          type: string
+        kind:
+          type: string
+          enum: [phone, desktop, browser]
+        signer_epoch:
+          type: integer
+        envelope_key_available:
+          type: boolean
+        envelope_public_key_spki_b64:
+          type: string
+          nullable: true
+    InstallCommandTarget:
+      type: object
+      required: [id, label, platform, remote_shell, local_command]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        platform:
+          type: string
+        remote_shell:
+          type: string
+          enum: [posix, powershell]
+        local_command:
+          type: string
+        authorized_key_line:
+          type: string
+          description: Present for classic fallback authorized_keys installation targets.
+    InstallerMetadata:
+      type: object
+      required: [script_url, expected_sha256_url, source_url]
+      properties:
+        script_url:
+          type: string
+          description: Short HTTPS endpoint that serves the ShellOrchestra default POSIX SSH key setup helper script. PowerShell helper URLs are derived from the same origin.
+        expected_sha256_url:
+          type: string
+          description: HTTPS endpoint that serves the expected SHA-256 hash for the default POSIX key setup helper script.
+        source_url:
+          type: string
+          description: Versioned HTTPS source URL for the default POSIX key setup helper script.
+    KeysStatus:
+      type: object
+      required: [initialized, auth_mode, active_epoch, cert_ttl_minutes, installer, install_targets, classic_install_targets, current_device_id, current_device_kind, desktop_setup_allowed, windows_desktop_server, local_protected_key_available, devices]
+      properties:
+        initialized:
+          type: boolean
+        auth_mode:
+          type: string
+          enum: [unset, passkey, lan_totp]
+        label:
+          type: string
+          nullable: true
+        public_key:
+          type: string
+          nullable: true
+        classic_public_key:
+          type: string
+          nullable: true
+        active_epoch:
+          type: integer
+        cert_ttl_minutes:
+          type: integer
+        installer:
+          $ref: '#/components/schemas/InstallerMetadata'
+        install_command:
+          type: string
+          nullable: true
+        install_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallCommandTarget'
+        classic_install_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallCommandTarget'
+        current_device_id:
+          type: string
+        current_device_kind:
+          type: string
+          enum: [phone, desktop, browser]
+        desktop_setup_allowed:
+          type: boolean
+        windows_desktop_server:
+          type: boolean
+        local_protected_key_available:
+          type: boolean
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyDevice'
+    KeysCreateRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: Human-readable label for this SSH CA key.
+        public_key:
+          type: string
+          description: Required when importing an existing private key. Must match the private key.
+        private_key:
+          type: string
+          description: Optional unencrypted OpenSSH Ed25519 private key to import as the ShellOrchestra CA.
+        passphrase:
+          type: string
+          description: LAN-only admin passphrase used to encrypt imported or generated key material.
+        rotate_confirmed:
+          type: boolean
+        approval_id:
+          type: string
+          description: Server-access key-change approval request ID from the primary approval phone workflow.
+        approval_poll_token:
+          type: string
+          description: Poll token proving the desktop owns the key-change approval request.
+    KeyChangeApprovalBegin:
+      type: object
+      required: [request_id, poll_token, verification_code, approve_url, state, expires_at]
+      properties:
+        request_id:
+          type: string
+        poll_token:
+          type: string
+        verification_code:
+          type: string
+        approve_url:
+          type: string
+        state:
+          $ref: '#/components/schemas/KeyChangeApprovalState'
+        expires_at:
+          type: string
+          format: date-time
+    KeyChangeApprovalStatusRequest:
+      type: object
+      required: [poll_token]
+      properties:
+        poll_token:
+          type: string
+    KeyChangeApprovalStatus:
+      type: object
+      required: [request_id, verification_code, state, expires_at]
+      properties:
+        request_id:
+          type: string
+        verification_code:
+          type: string
+        state:
+          $ref: '#/components/schemas/KeyChangeApprovalState'
+        approved_by_device_id:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          format: date-time
+    KeyChangeApprovalState:
+      type: string
+      enum: [pending, approved, consumed, denied]
+    KeysCreateResponse:
+      type: object
+      required: [initialized, auth_mode, public_key, classic_public_key, active_epoch, install_command, installer, install_targets, classic_install_targets, windows_desktop_server, local_protected_key_available, devices]
+      properties:
+        initialized:
+          type: boolean
+        auth_mode:
+          type: string
+          enum: [passkey, lan_totp]
+        label:
+          type: string
+          nullable: true
+        public_key:
+          type: string
+        classic_public_key:
+          type: string
+        active_epoch:
+          type: integer
+        device_share_b64:
+          type: string
+          nullable: true
+        install_command:
+          type: string
+        installer:
+          $ref: '#/components/schemas/InstallerMetadata'
+        install_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallCommandTarget'
+        classic_install_targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallCommandTarget'
+        windows_desktop_server:
+          type: boolean
+        local_protected_key_available:
+          type: boolean
+        devices:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyDevice'
+    CurrentDeviceKeyShare:
+      type: object
+      required: [active_epoch, encrypted_device_share_b64]
+      properties:
+        active_epoch:
+          type: integer
+        encrypted_device_share_b64:
+          type: string
+    DeviceKeyShareInput:
+      type: object
+      required: [device_id, epoch, encrypted_device_share_b64]
+      properties:
+        device_id:
+          type: string
+        epoch:
+          type: integer
+        encrypted_device_share_b64:
+          type: string
+    DeviceKeySharesRequest:
+      type: object
+      required: [shares]
+      properties:
+        shares:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeviceKeyShareInput'
+    DeviceKeySharesResponse:
+      type: object
+      required: [stored, active_epoch]
+      properties:
+        stored:
+          type: integer
+        active_epoch:
+          type: integer
+    CurrentDeviceShareRequest:
+      type: object
+      required: [epoch, encrypted_device_share_b64]
+      properties:
+        epoch:
+          type: integer
+        encrypted_device_share_b64:
+          type: string
+
+    SystemVersionCheck:
+      type: object
+      required: [status, current_version, current_edition, channel, update_available, critical, one_click_available, manual_upgrade_required, install_method, message, checked_at]
+      properties:
+        status:
+          type: string
+          enum: [disabled, not_configured, ok, error]
+        current_version:
+          type: string
+        current_edition:
+          type: string
+        channel:
+          type: string
+        latest_version:
+          type: string
+        update_available:
+          type: boolean
+        critical:
+          type: boolean
+        minimum_supported:
+          type: string
+        release_notes_url:
+          type: string
+        one_click_available:
+          type: boolean
+        manual_upgrade_required:
+          type: boolean
+        install_method:
+          type: string
+          enum: [official, manual, windows_app, unknown]
+        manual_upgrade_command:
+          type: string
+        manual_upgrade_url:
+          type: string
+        message:
+          type: string
+        checked_at:
+          type: string
+          format: date-time
+        artifacts:
+          type: array
+          items:
+            type: string
+    SystemUpgradeStartResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+        job_id:
+          type: string
+        message:
+          type: string
+        target_version:
+          type: string
+    SystemUpgradeJob:
+      type: object
+      required: [id, status, message, channel, target_version, started_at]
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [queued, running, applying, completed, failed]
+        message:
+          type: string
+        channel:
+          type: string
+        target_version:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        error:
+          type: string
+        log_tail:
+          type: string
+    UISettingsInput:
+      type: object
+      required: [wallpaper_choice, wallpaper_dim_percent, wallpaper_overridden, terminal_font_size, terminal_scrollback_lines, terminal_cursor_style, terminal_keymap_layout, terminal_suppress_touch_keyboard, terminal_tmux_prefix_guard, desktop_control_height_px, desktop_window_padding_px, desktop_taskbar_padding_px, desktop_taskbar_padding_y_px, desktop_toolbar_padding_x_px, desktop_toolbar_padding_y_px, desktop_toast_visible_ms, desktop_toast_fade_ms]
+      properties:
+        wallpaper_choice:
+          type: string
+          enum: [garage_empty, garage_hotrod, custom]
+        wallpaper_dim_percent:
+          type: integer
+          minimum: 0
+          maximum: 95
+        wallpaper_overridden:
+          type: boolean
+          description: "When false, ShellOrchestra uses the built-in automatic wallpaper policy: empty garage before sign-in and hot rod garage after sign-in. When true, wallpaper_choice overrides both states."
+        locale_override:
+          type: string
+          nullable: true
+          description: Optional browser locale tag override, for example en-US or uk-UA. Empty means use the browser locale.
+        timezone_override:
+          type: string
+          nullable: true
+          description: Optional IANA timezone override, for example Europe/Kyiv. Empty means use the browser timezone.
+        terminal_font_size:
+          type: integer
+          minimum: 8
+          maximum: 28
+          description: Font size used by every ShellOrchestra terminal window.
+        terminal_scrollback_lines:
+          type: integer
+          minimum: 200
+          maximum: 50000
+          description: Scrollback history length used by every ShellOrchestra terminal window.
+        terminal_cursor_style:
+          type: string
+          enum: [underline, bar]
+          description: Cursor style used by every ShellOrchestra terminal window.
+        terminal_keymap_layout:
+          type: string
+          enum: [en, ru]
+          description: Terminal keyboard helper layout. EN converts accidental Cyrillic layout back to command-friendly Latin; RU maps Latin keys to Cyrillic characters.
+        terminal_suppress_touch_keyboard:
+          type: boolean
+          description: When true, ShellOrchestra asks mobile browsers not to open the touch keyboard automatically for terminal focus.
+        terminal_tmux_prefix_guard:
+          type: boolean
+          description: When true, ShellOrchestra intercepts the reserved tmux prefix key before it reaches the managed terminal.
+        desktop_control_height_px:
+          type: integer
+          minimum: 32
+          maximum: 48
+          description: Global pixel height for standard virtual-desktop app buttons and input controls.
+        desktop_window_padding_px:
+          type: integer
+          minimum: 0
+          maximum: 24
+          description: Global pixel padding inside non-terminal virtual-desktop app windows.
+        desktop_taskbar_padding_px:
+          type: integer
+          minimum: 0
+          maximum: 16
+          description: Global horizontal taskbar padding for virtual desktops.
+        desktop_taskbar_padding_y_px:
+          type: integer
+          minimum: 0
+          maximum: 12
+          description: Global vertical taskbar padding for virtual desktops.
+        desktop_toolbar_padding_x_px:
+          type: integer
+          minimum: 0
+          maximum: 24
+          description: Global horizontal padding inside virtual-desktop app toolbars.
+        desktop_toolbar_padding_y_px:
+          type: integer
+          minimum: 0
+          maximum: 16
+          description: Global vertical padding inside virtual-desktop app toolbars.
+        desktop_toast_visible_ms:
+          type: integer
+          minimum: 1000
+          maximum: 30000
+          description: Time that virtual-desktop toasts stay fully visible before dissolving. Default is 4000 ms.
+        desktop_toast_fade_ms:
+          type: integer
+          minimum: 250
+          maximum: 5000
+          description: Toast dissolve animation duration. Default is 1500 ms.
+    UISettings:
+      type: object
+      required: [wallpaper_choice, wallpaper_dim_percent, wallpaper_overridden, terminal_font_size, terminal_scrollback_lines, terminal_cursor_style, terminal_keymap_layout, terminal_suppress_touch_keyboard, terminal_tmux_prefix_guard, desktop_control_height_px, desktop_window_padding_px, desktop_taskbar_padding_px, desktop_taskbar_padding_y_px, desktop_toolbar_padding_x_px, desktop_toolbar_padding_y_px, desktop_toast_visible_ms, desktop_toast_fade_ms, custom_wallpaper_available, updated_at]
+      properties:
+        wallpaper_choice:
+          type: string
+          enum: [garage_empty, garage_hotrod, custom]
+        wallpaper_dim_percent:
+          type: integer
+          minimum: 0
+          maximum: 95
+        wallpaper_overridden:
+          type: boolean
+        locale_override:
+          type: string
+          nullable: true
+        timezone_override:
+          type: string
+          nullable: true
+        terminal_font_size:
+          type: integer
+          minimum: 8
+          maximum: 28
+        terminal_scrollback_lines:
+          type: integer
+          minimum: 200
+          maximum: 50000
+        terminal_cursor_style:
+          type: string
+          enum: [underline, bar]
+        terminal_keymap_layout:
+          type: string
+          enum: [en, ru]
+        terminal_suppress_touch_keyboard:
+          type: boolean
+        terminal_tmux_prefix_guard:
+          type: boolean
+        desktop_control_height_px:
+          type: integer
+          minimum: 32
+          maximum: 48
+        desktop_window_padding_px:
+          type: integer
+          minimum: 0
+          maximum: 24
+        desktop_taskbar_padding_px:
+          type: integer
+          minimum: 0
+          maximum: 16
+        desktop_taskbar_padding_y_px:
+          type: integer
+          minimum: 0
+          maximum: 12
+        desktop_toolbar_padding_x_px:
+          type: integer
+          minimum: 0
+          maximum: 24
+        desktop_toolbar_padding_y_px:
+          type: integer
+          minimum: 0
+          maximum: 16
+        desktop_toast_visible_ms:
+          type: integer
+          minimum: 1000
+          maximum: 30000
+        desktop_toast_fade_ms:
+          type: integer
+          minimum: 250
+          maximum: 5000
+        custom_wallpaper_available:
+          type: boolean
+        custom_wallpaper_url:
+          type: string
+          nullable: true
+        custom_wallpaper_content_type:
+          type: string
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+    SSHSecuritySettingsInput:
+      type: object
+      required: [allowed_source_addresses, cert_ttl_minutes, access_token_ttl_minutes, light_status_interval_seconds, detection_interval_seconds, periodic_script_tick_seconds]
+      properties:
+        allowed_source_addresses:
+          type: array
+          description: Empty array allows SSH certificates and classic fallback key lines from any source address. Non-empty entries must be IP addresses or CIDR networks.
+          items:
+            type: string
+        cert_ttl_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+          description: Lifetime of each short-lived SSH user certificate in minutes.
+        access_token_ttl_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+          description: Browser sign-in session lifetime before the device must prove possession of its passkey again.
+        light_status_interval_seconds:
+          type: integer
+          minimum: 2
+          maximum: 3600
+          description: Interval for lightweight server status scripts on already connected servers.
+        detection_interval_seconds:
+          type: integer
+          minimum: 60
+          maximum: 86400
+          description: Interval for heavier server detection scripts after the initial connect-time detection.
+        periodic_script_tick_seconds:
+          type: integer
+          minimum: 1
+          maximum: 60
+          description: Scheduler resolution for periodic worker jobs.
+    SSHSecuritySettings:
+      type: object
+      required: [allowed_source_addresses, allows_any_source, cert_ttl_minutes, access_token_ttl_minutes, light_status_interval_seconds, detection_interval_seconds, periodic_script_tick_seconds, updated_at]
+      properties:
+        allowed_source_addresses:
+          type: array
+          items:
+            type: string
+        allows_any_source:
+          type: boolean
+        cert_ttl_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+        access_token_ttl_minutes:
+          type: integer
+          minimum: 1
+          maximum: 1440
+        light_status_interval_seconds:
+          type: integer
+          minimum: 2
+          maximum: 3600
+        detection_interval_seconds:
+          type: integer
+          minimum: 60
+          maximum: 86400
+        periodic_script_tick_seconds:
+          type: integer
+          minimum: 1
+          maximum: 60
+        updated_at:
+          type: string
+          format: date-time
+    BackendToolsStatus:
+      type: object
+      required: [enabled, telemetry_available, restart_allowed, message, updated_at, services]
+      properties:
+        enabled:
+          type: boolean
+        telemetry_available:
+          type: boolean
+        restart_allowed:
+          type: boolean
+        message:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        summary:
+          $ref: '#/components/schemas/BackendResourceSummary'
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackendServiceStatus'
+    BackendResourceSummary:
+      type: object
+      required: [service_count, responding_count, cpu_ready_count]
+      properties:
+        service_count:
+          type: integer
+        responding_count:
+          type: integer
+        cpu_usage_percent:
+          type: number
+          format: double
+        cpu_ready_count:
+          type: integer
+        go_memory_bytes:
+          type: integer
+          format: int64
+        memory_usage_bytes:
+          type: integer
+          format: int64
+        memory_limit_bytes:
+          type: integer
+          format: int64
+        data_dir_bytes:
+          type: integer
+          format: int64
+        data_dir_scan_truncated:
+          type: boolean
+    BackendServiceStatus:
+      type: object
+      required: [name, state]
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+        version:
+          type: string
+        state:
+          type: string
+        status:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        uptime_seconds:
+          type: integer
+          format: int64
+        go_memory_bytes:
+          type: integer
+          format: int64
+        cpu_usage_percent:
+          type: number
+          format: double
+        cpu_usage_ready:
+          type: boolean
+        memory_usage_bytes:
+          type: integer
+          format: int64
+        memory_limit_bytes:
+          type: integer
+          format: int64
+        data_dir_bytes:
+          type: integer
+          format: int64
+        data_dir_scan_truncated:
+          type: boolean
+        details:
+          type: object
+          additionalProperties: true
+        error:
+          type: string
+    ServerInput:
+      type: object
+      required: [name, host, port, username]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        host:
+          type: string
+          minLength: 1
+          maxLength: 255
+        port:
+          type: integer
+          minimum: 1
+          maximum: 65535
+        username:
+          type: string
+          minLength: 1
+          maxLength: 120
+        connection_mode:
+          type: string
+          enum: [direct, chained]
+          default: direct
+        jump_server_id:
+          type: string
+          nullable: true
+        auth_method:
+          type: string
+          enum: [ca, classic, custom_key, local_protected_key]
+          default: ca
+        ssh_key_id:
+          type: string
+          nullable: true
+        shell_hint:
+          type: string
+          enum: [auto, posix, bash, zsh, powershell]
+        os_hint:
+          type: string
+        distro_hint:
+          type: string
+        detected_shell:
+          type: string
+        detected_os:
+          type: string
+        detected_distro:
+          type: string
+        detected_admin_rights:
+          type: string
+        detected_hostname:
+          type: string
+        detected_platform:
+          type: string
+        detected_platform_os:
+          type: string
+        detected_platform_arch:
+          type: string
+        detected_kernel_version:
+          type: string
+        detected_package_manager:
+          type: string
+        detected_ssh_max_sessions:
+          type: integer
+          minimum: 0
+        detected_pve_host:
+          type: boolean
+        detected_docker_host:
+          type: boolean
+        detected_apps:
+          type: object
+          additionalProperties:
+            type: boolean
+        override_shell:
+          type: string
+          nullable: true
+        override_os:
+          type: string
+          nullable: true
+        override_distro:
+          type: string
+          nullable: true
+        override_admin_rights:
+          type: string
+          nullable: true
+        host_key:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+        notes:
+          type: string
+    Server:
+      allOf:
+        - $ref: '#/components/schemas/ServerInput'
+        - type: object
+          required: [id, connection_mode, auth_method, shell_hint, os_hint, distro_hint, detected_shell, detected_os, detected_distro, detected_admin_rights, detected_hostname, detected_platform, detected_platform_os, detected_platform_arch, detected_kernel_version, detected_package_manager, detected_ssh_max_sessions, detected_pve_host, detected_docker_host, detected_apps, created_at, updated_at]
+          properties:
+            id:
+              type: string
+            shell_hint:
+              type: string
+              enum: [auto, posix, bash, zsh, powershell]
+              description: Backend-detected shell family. Client input is ignored.
+            os_hint:
+              type: string
+              description: Backend-detected operating system family.
+            distro_hint:
+              type: string
+              description: Backend-detected distribution identifier when available.
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    ServerWizardRequest:
+      type: object
+      required: [server]
+      properties:
+        server:
+          $ref: '#/components/schemas/ServerInput'
+    ServerTCPTestResult:
+      type: object
+      required: [reachable, message, verbose]
+      properties:
+        reachable:
+          type: boolean
+        message:
+          type: string
+        verbose:
+          type: array
+          items:
+            type: string
+    ServerAuthTestResult:
+      type: object
+      required: [authenticated, message, verbose]
+      properties:
+        authenticated:
+          type: boolean
+        host_key:
+          type: string
+        host_key_sha256:
+          type: string
+        host_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostKeyIdentity'
+        host_key_mismatch:
+          type: boolean
+        expected_host_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostKeyIdentity'
+        actual_host_key:
+          $ref: '#/components/schemas/HostKeyIdentity'
+        message:
+          type: string
+        verbose:
+          type: array
+          items:
+            type: string
+    HostKeyIdentity:
+      type: object
+      required: [type, sha256, authorized_key]
+      properties:
+        type:
+          type: string
+        sha256:
+          type: string
+        authorized_key:
+          type: string
+    HostKeyScanResult:
+      type: object
+      required: [host_keys, host_key, message, verbose]
+      properties:
+        host_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/HostKeyIdentity'
+        host_key:
+          type: string
+        message:
+          type: string
+        verbose:
+          type: array
+          items:
+            type: string
+    HostKeyAcceptRequest:
+      type: object
+      required: [host_key]
+      properties:
+        host_key:
+          type: string
+    ServerFacts:
+      type: object
+      required: [hostname, shell, os, platform, platform_os, platform_arch, distro, admin_rights, kernel_version, package_manager, is_pve_host, is_docker_host, apps]
+      properties:
+        hostname:
+          type: string
+        shell:
+          type: string
+        os:
+          type: string
+        platform:
+          type: string
+        platform_os:
+          type: string
+        platform_arch:
+          type: string
+        distro:
+          type: string
+        admin_rights:
+          type: string
+        kernel_version:
+          type: string
+        package_manager:
+          type: string
+        is_pve_host:
+          type: boolean
+        is_docker_host:
+          type: boolean
+        apps:
+          type: object
+          additionalProperties:
+            type: boolean
+    ServerBatchActionRequest:
+      type: object
+      required: [server_ids]
+      properties:
+        server_ids:
+          type: array
+          minItems: 1
+          items:
+            type: string
+    ServerBatchActionItem:
+      type: object
+      required: [server_id]
+      properties:
+        server_id:
+          type: string
+        server_name:
+          type: string
+        run:
+          $ref: '#/components/schemas/ScriptRun'
+        error:
+          type: string
+    ServerBatchActionResponse:
+      type: object
+      required: [command, started, results]
+      properties:
+        command:
+          type: string
+        started:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServerBatchActionItem'
+    VirtualDesktopWindow:
+      type: object
+      required: [id, kind, title, x, y, width, height, minimized, maximized, z_index]
+      properties:
+        id:
+          type: string
+        app_id:
+          type: string
+        plugin_id:
+          type: string
+        frontend_module:
+          type: string
+        kind:
+          type: string
+        title:
+          type: string
+        x:
+          type: integer
+        y:
+          type: integer
+        width:
+          type: integer
+        height:
+          type: integer
+        minimized:
+          type: boolean
+        maximized:
+          type: boolean
+        z_index:
+          type: integer
+        terminal_session_id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    VirtualDesktopState:
+      type: object
+      required: [server_id, revision, windows, updated_at]
+      properties:
+        server_id:
+          type: string
+        wallpaper:
+          type: string
+        revision:
+          type: integer
+          format: int64
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualDesktopWindow'
+        updated_at:
+          type: string
+          format: date-time
+    VirtualDesktopSaveRequest:
+      type: object
+      required: [windows]
+      properties:
+        base_revision:
+          type: integer
+          format: int64
+        wallpaper:
+          type: string
+          nullable: true
+          description: Per-server virtual desktop wallpaper choice. Empty or gradient uses the built-in ShellOrchestra desktop background.
+        windows:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualDesktopWindow'
+    VirtualDesktopSaveConflict:
+      type: object
+      required: [error, state]
+      properties:
+        error:
+          type: string
+        state:
+          $ref: '#/components/schemas/VirtualDesktopState'
+    VirtualDesktopWallpaper:
+      type: object
+      required: [id, label, content_type, source, url, created_at, updated_at]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        content_type:
+          type: string
+        source:
+          type: string
+        url:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    VirtualDesktopWallpaperList:
+      type: object
+      required: [wallpapers]
+      properties:
+        wallpapers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualDesktopWallpaper'
+    DesktopApp:
+      type: object
+      required: [id, plugin_id, edition, title, description, kind, icon, supported, installed, installable, requires_docker, hidden, capabilities, permissions, sandbox_policy, integrated_window, default_width, default_height, default_maximized]
+      properties:
+        id:
+          type: string
+        plugin_id:
+          type: string
+        edition:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        kind:
+          type: string
+        icon:
+          type: string
+        frontend_module:
+          type: string
+        backend_driver:
+          type: string
+        detected_app:
+          type: string
+          nullable: true
+        launch_command:
+          type: string
+          nullable: true
+        install_command:
+          type: string
+          nullable: true
+        data_command:
+          type: string
+          nullable: true
+        actions:
+          type: object
+          additionalProperties:
+            type: string
+        supported_os:
+          type: array
+          items:
+            type: string
+        requires_docker:
+          type: boolean
+        hidden:
+          type: boolean
+        capabilities:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        sandbox_policy:
+          type: string
+        integrated_window:
+          type: boolean
+        default_width:
+          type: integer
+        default_height:
+          type: integer
+        default_maximized:
+          type: boolean
+        data_refresh_interval_seconds:
+          type: integer
+        data_monitor_interval_seconds:
+          type: integer
+        data_monitor_ttl_seconds:
+          type: integer
+        supported:
+          type: boolean
+        installed:
+          type: boolean
+        installable:
+          type: boolean
+        unavailable_hint:
+          type: string
+          nullable: true
+    DesktopAppListResponse:
+      type: object
+      required: [apps]
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/DesktopApp'
+    DesktopAppLaunchRequest:
+      type: object
+      required: [server_id]
+      properties:
+        server_id:
+          type: string
+        cols:
+          type: integer
+        rows:
+          type: integer
+        args:
+          type: object
+          additionalProperties:
+            type: string
+    DesktopAppLaunchResponse:
+      type: object
+      required: [app, terminal]
+      properties:
+        app:
+          $ref: '#/components/schemas/DesktopApp'
+        terminal:
+          $ref: '#/components/schemas/TerminalSnapshot'
+    DesktopAppInstallRequest:
+      type: object
+      required: [server_id, confirmed]
+      properties:
+        server_id:
+          type: string
+        confirmed:
+          type: boolean
+          description: Explicit operator confirmation that ShellOrchestra may run an install script that changes the managed server.
+    DesktopAppInstallResponse:
+      type: object
+      required: [app, run]
+      properties:
+        app:
+          $ref: '#/components/schemas/DesktopApp'
+        run:
+          $ref: '#/components/schemas/ScriptRun'
+    DesktopAppActionRequest:
+      type: object
+      required: [server_id, action, confirmed]
+      properties:
+        server_id:
+          type: string
+        action:
+          type: string
+        confirmed:
+          type: boolean
+          description: Explicit operator confirmation that ShellOrchestra may run a mutating action script on the managed server.
+        args:
+          type: object
+          additionalProperties:
+            type: string
+    DesktopAppActionResponse:
+      type: object
+      required: [app, action, command, run]
+      properties:
+        app:
+          $ref: '#/components/schemas/DesktopApp'
+        action:
+          type: string
+        command:
+          type: string
+        run:
+          $ref: '#/components/schemas/ScriptRun'
+    DesktopAppDataRequest:
+      type: object
+      required: [server_id]
+      properties:
+        server_id:
+          type: string
+        args:
+          type: object
+          additionalProperties:
+            type: string
+        confirmed:
+          type: boolean
+          default: false
+    DesktopAppDataResponse:
+      type: object
+      required: [app, result]
+      properties:
+        app:
+          $ref: '#/components/schemas/DesktopApp'
+        result:
+          type: object
+          additionalProperties: true
+    FileVersionSummary:
+      type: object
+      required: [id, server_id, path, role, content_sha256, remote_sha256, size_bytes, actor_device_id, actor_label, audit_event_id, created_at]
+      properties:
+        id:
+          type: string
+        server_id:
+          type: string
+        path:
+          type: string
+        role:
+          type: string
+        content_sha256:
+          type: string
+        remote_sha256:
+          type: string
+        size_bytes:
+          type: integer
+          format: int64
+        actor_device_id:
+          type: string
+        actor_label:
+          type: string
+        audit_event_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    FileVersionContent:
+      allOf:
+        - $ref: '#/components/schemas/FileVersionSummary'
+        - type: object
+          required: [content, encoding]
+          properties:
+            content:
+              type: string
+            encoding:
+              type: string
+    FileVersionListResponse:
+      type: object
+      required: [versions]
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileVersionSummary'
+    AuditHead:
+      type: object
+      required: [sequence, hash, signature, public_key, created_at]
+      properties:
+        sequence:
+          type: integer
+          format: int64
+        hash:
+          type: string
+        signature:
+          type: string
+        public_key:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    AuditVerifyResult:
+      type: object
+      required: [ok, events, head_hash, public_key, message]
+      properties:
+        ok:
+          type: boolean
+        events:
+          type: integer
+          format: int64
+        head_hash:
+          type: string
+        public_key:
+          type: string
+        message:
+          type: string
+    TerminalCreateRequest:
+      type: object
+      required: [server_id]
+      properties:
+        server_id:
+          type: string
+        title:
+          type: string
+        cols:
+          type: integer
+        rows:
+          type: integer
+    TerminalInputRequest:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: string
+    TerminalResizeRequest:
+      type: object
+      properties:
+        cols:
+          type: integer
+        rows:
+          type: integer
+    TerminalSession:
+      type: object
+      required: [id, server_id, title, state, rows, cols, created_at, updated_at]
+      properties:
+        id:
+          type: string
+        server_id:
+          type: string
+        title:
+          type: string
+        state:
+          type: string
+        rows:
+          type: integer
+        cols:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    TerminalSnapshot:
+      type: object
+      required: [session, capture, cursor_x, cursor_y, cursor_visible, alternate]
+      properties:
+        session:
+          $ref: '#/components/schemas/TerminalSession'
+        capture:
+          type: string
+        cursor_x:
+          type: integer
+        cursor_y:
+          type: integer
+        cursor_visible:
+          type: boolean
+        alternate:
+          type: boolean
+    SSHUserKey:
+      type: object
+      required: [id, label, public_key, created_at, updated_at]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        public_key:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    SSHUserKeyCreateRequest:
+      type: object
+      required: [public_key, private_key]
+      properties:
+        label:
+          type: string
+        public_key:
+          type: string
+        private_key:
+          type: string
+    SSHConfigSourceScanRequest:
+      type: object
+      properties:
+        default_username:
+          type: string
+          nullable: true
+    SSHConfigSourceScanSource:
+      type: object
+      required: [id, label, state, profile_count]
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        state:
+          type: string
+          enum: [found, empty, not_found, windows_only, unsupported, error]
+        profile_count:
+          type: integer
+        unsupported_reason:
+          type: string
+        detail:
+          type: string
+    SSHConfigSourceScanIdentityRef:
+      type: object
+      required: [provider]
+      properties:
+        provider:
+          type: string
+        path:
+          type: string
+        handle:
+          type: string
+    SSHConfigSourceScanProfile:
+      type: object
+      required: [source, source_profile_id, label_proposed, host_alias, hostname, port, user, auth_suggestion, open_ssh_config]
+      properties:
+        source:
+          type: string
+        source_profile_id:
+          type: string
+        label_proposed:
+          type: string
+        host_alias:
+          type: string
+        hostname:
+          type: string
+        port:
+          type: integer
+        user:
+          type: string
+        identity_refs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SSHConfigSourceScanIdentityRef'
+        proxy:
+          type: object
+          additionalProperties:
+            type: string
+        auth_suggestion:
+          type: string
+        warnings:
+          type: array
+          items:
+            type: string
+        open_ssh_config:
+          type: string
+    SSHConfigSourceScanResult:
+      type: object
+      required: [sources, profiles]
+      properties:
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SSHConfigSourceScanSource'
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/SSHConfigSourceScanProfile'
+    SSHConfigImportRequest:
+      type: object
+      required: [config]
+      properties:
+        config:
+          type: string
+          description: Raw OpenSSH client config text to import.
+        default_username:
+          type: string
+          nullable: true
+          description: Explicit username to apply to Host blocks without User.
+        import_identity_files:
+          type: boolean
+          description: Windows desktop-server only. Import IdentityFile entries that can be read and used without passphrase or UI prompts.
+        import_local_protected_keys:
+          type: boolean
+          description: Windows desktop-server only. Allow TPM/CNG/agent identities after a non-interactive capability check.
+    SSHConfigImportSkipped:
+      type: object
+      required: [line, reason]
+      properties:
+        line:
+          type: integer
+        host:
+          type: string
+          nullable: true
+        reason:
+          type: string
+    SSHConfigImportResult:
+      type: object
+      required: [created, updated, skipped, public_key]
+      properties:
+        created:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
+        updated:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
+        skipped:
+          type: array
+          items:
+            $ref: '#/components/schemas/SSHConfigImportSkipped'
+        public_key:
+          type: string
+        imported_keys:
+          type: integer
+          description: Number of unencrypted IdentityFile keys imported into the key vault.
+    ServerStatus:
+      type: object
+      required: [server_id, state, updated_at]
+      properties:
+        server_id:
+          type: string
+        state:
+          type: string
+          enum: [locked, disconnected, connecting, connected, retrying_network, blocked_auth, blocked_config, jump_unavailable, host_key_required, host_key_mismatch, failed]
+        telemetry:
+          type: object
+          additionalProperties: true
+        last_error:
+          type: string
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+    BootstrapCommand:
+      type: object
+      required: [command, public_key]
+      properties:
+        command:
+          type: string
+        public_key:
+          type: string
+    ScriptCommand:
+      type: object
+      required: [name, description, variants]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        app_ids:
+          type: array
+          items:
+            type: string
+        app_role:
+          type: string
+        variants:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptSource'
+    ScriptSource:
+      type: object
+      required: [variant, file, shell]
+      properties:
+        variant:
+          type: string
+        file:
+          type: string
+        shell:
+          type: string
+        os:
+          type: array
+          items:
+            type: string
+        distro:
+          type: array
+          items:
+            type: string
+        package_managers:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+        source_error:
+          type: string
+    SystemScriptSource:
+      type: object
+      required: [name, file, shell]
+      properties:
+        name:
+          type: string
+        file:
+          type: string
+        shell:
+          type: string
+        source:
+          type: string
+        source_error:
+          type: string
+    RunScriptRequest:
+      type: object
+      required: [server_id]
+      properties:
+        server_id:
+          type: string
+        args:
+          type: object
+          additionalProperties: true
+    ScriptRun:
+      type: object
+      required: [id, server_id, command, state, created_at]
+      properties:
+        id:
+          type: string
+        server_id:
+          type: string
+        command:
+          type: string
+        variant:
+          type: string
+          nullable: true
+        state:
+          type: string
+          enum: [queued, running, succeeded, failed]
+        result:
+          type: object
+          additionalProperties: true
+          nullable: true
+        error:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        finished_at:
+          type: string
+          format: date-time
+          nullable: true

@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+.DS_Store
+*.log
+.repomap.tags.cache.v1/
+.repo-map-tags-cache/
+.safe-go-cache/
+backend/.shellorchestra-build/

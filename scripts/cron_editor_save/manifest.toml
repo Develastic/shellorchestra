@@ -1,0 +1,19 @@
+name = "cron_editor_save"
+description = "Save one user crontab for the virtual desktop Cron Editor app."
+output_schema = "cron-editor-data-v1"
+app_ids = ["cron_editor"]
+app_role = "action"
+timeout_seconds = 20
+stream_policy = "json_action"
+requires_sudo = true
+audit_fields = ["cron_user", "cron_content"]
+max_stdout_bytes = 1048576
+max_stderr_bytes = 131072
+max_decoded_bytes = 1048576
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true

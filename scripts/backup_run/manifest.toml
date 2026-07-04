@@ -1,0 +1,25 @@
+name = "backup_run"
+description = "Create one local backup archive from a source path into a prepared bucket on the same server."
+output_schema = "backup-run-v1"
+app_ids = ["backup_manager"]
+app_role = "action"
+timeout_seconds = 7200
+stream_policy = "json_action"
+max_stdout_bytes = 1048576
+max_stderr_bytes = 1048576
+max_decoded_bytes = 2097152
+requires_sudo = true
+audit_fields = ["backup_source_path", "backup_bucket_path", "backup_task_id", "backup_compression"]
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

@@ -1,0 +1,24 @@
+name = "packages_data"
+description = "Inspect installed/searchable packages and local security metadata using the detected target package manager."
+output_schema = "packages-data-v1"
+app_ids = ["package_manager"]
+app_role = "data"
+timeout_seconds = 60
+stream_policy = "json"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = false
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

@@ -1,0 +1,30 @@
+name = "firewall_action"
+description = "Apply a guarded firewall action from the virtual desktop Firewall app."
+output_schema = "firewall-action-v1"
+app_ids = ["firewall"]
+app_role = "action"
+timeout_seconds = 30
+stream_policy = "json_action"
+max_stdout_bytes = 8388608
+max_stderr_bytes = 1048576
+max_decoded_bytes = 33554432
+requires_sudo = true
+audit_fields = ["firewall_action", "firewall_rule", "firewall_rule_number", "ssh_port"]
+
+[[variants]]
+id = "linux-ufw"
+file = "posix.sh"
+shell = "posix"
+os = ["linux"]
+
+[[variants]]
+id = "macos-application-firewall"
+file = "macos.sh"
+shell = "posix"
+os = ["darwin"]
+
+[[variants]]
+id = "windows-netsecurity"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]

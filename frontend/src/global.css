@@ -1,0 +1,213 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Mykola Rudenko
+ * SPDX-License-Identifier: LicenseRef-ShellOrchestra-Source-Available-1.0
+ * ShellOrchestra is source-available, not open source. See LICENSE.md and https://shellorchestra.com/legal/license/.
+ * Commercial distribution: Develastic, s. r. o.
+ */
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/fonts/iosevka/Iosevka-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/fonts/iosevka/Iosevka-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/fonts/iosevka/Iosevka-Bold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Iosevka";
+  src: url("/fonts/iosevka/Iosevka-Bold.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.servers-page-dialog-priority.MuiDialog-root {
+  z-index: 10000 !important;
+}
+
+.servers-page-dialog-priority .MuiBackdrop-root {
+  z-index: 10000 !important;
+}
+
+.servers-page-dialog-priority .MuiDialog-container {
+  z-index: 10001 !important;
+}
+
+.servers-page-dialog-priority .MuiPaper-root.MuiDialog-paper {
+  position: relative !important;
+  z-index: 10002 !important;
+  background: rgb(17, 24, 17) !important;
+  background-image: none !important;
+  opacity: 1 !important;
+}
+
+.desktop-unsaved-close-dialog.MuiDialog-root {
+  z-index: 20000 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiBackdrop-root {
+  background: rgba(0, 0, 0, 0.74) !important;
+}
+
+.desktop-unsaved-close-dialog .MuiPaper-root.MuiDialog-paper {
+  background: #0f150e !important;
+  background-image: none !important;
+  color: #dee5d9 !important;
+  border: 1px solid rgba(255, 179, 0, 0.76) !important;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.88), 0 0 40px rgba(255, 179, 0, 0.18) !important;
+  opacity: 1 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiDialogTitle-root {
+  color: #ebffe2 !important;
+  font-weight: 700 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiDialogContent-root,
+.desktop-unsaved-close-dialog .MuiTypography-root {
+  color: #dee5d9 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiAlert-root {
+  background: rgba(255, 179, 0, 0.14) !important;
+  border-color: rgba(255, 179, 0, 0.72) !important;
+  color: #dee5d9 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiAlert-icon {
+  color: #ffb300 !important;
+}
+
+.desktop-unsaved-close-dialog .MuiAlert-message {
+  color: #dee5d9 !important;
+}
+
+.desktop-unsaved-close-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.desktop-unsaved-close-panel {
+  width: min(520px, calc(100vw - 48px));
+  border: 1px solid rgba(255, 179, 0, 0.78);
+  border-radius: 6px;
+  background: #0f150e;
+  color: #dee5d9;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.88), 0 0 40px rgba(255, 179, 0, 0.2);
+  padding: 18px;
+}
+
+.desktop-unsaved-close-title {
+  margin: 0 0 14px;
+  color: #ebffe2;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.desktop-unsaved-close-warning {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 179, 0, 0.72);
+  border-radius: 4px;
+  background: rgba(255, 179, 0, 0.14);
+  color: #dee5d9;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.desktop-unsaved-close-warning-icon {
+  color: #ffb300;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.desktop-unsaved-close-details {
+  margin: 0 0 10px;
+  color: #dee5d9;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.desktop-unsaved-close-window {
+  margin: 0 0 18px;
+  color: #b9ccb2;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.desktop-unsaved-close-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.desktop-unsaved-close-cancel,
+.desktop-unsaved-close-confirm {
+  min-height: 32px;
+  border-radius: 3px;
+  padding: 0 14px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.desktop-unsaved-close-cancel {
+  border: 1px solid transparent;
+  background: transparent;
+  color: #00ff41;
+}
+
+.desktop-unsaved-close-cancel:hover,
+.desktop-unsaved-close-cancel:focus-visible {
+  border-color: rgba(0, 255, 65, 0.48);
+  background: rgba(0, 255, 65, 0.08);
+  outline: none;
+}
+
+.desktop-unsaved-close-confirm {
+  border: 1px solid rgba(255, 179, 0, 0.88);
+  background: #8f6500;
+  color: #0f150e;
+}
+
+.desktop-unsaved-close-confirm:hover,
+.desktop-unsaved-close-confirm:focus-visible {
+  background: #ffb300;
+  outline: none;
+}

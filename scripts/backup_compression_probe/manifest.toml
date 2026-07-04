@@ -1,0 +1,24 @@
+name = "backup_compression_probe"
+description = "Detect available compression tools for backup archives."
+output_schema = "backup-compression-probe-v1"
+app_ids = ["backup_manager"]
+app_role = "data"
+timeout_seconds = 20
+stream_policy = "json"
+max_stdout_bytes = 262144
+max_stderr_bytes = 262144
+max_decoded_bytes = 524288
+requires_sudo = false
+
+[[variants]]
+id = "posix"
+file = "posix.sh"
+shell = "posix"
+os = ["linux", "darwin", "freebsd"]
+default = true
+
+[[variants]]
+id = "powershell"
+file = "powershell.ps1"
+shell = "powershell"
+os = ["windows"]
