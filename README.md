@@ -49,12 +49,38 @@ This repository publishes ShellOrchestra source code for inspection, security re
 
 Official release builds, installers, update manifests, signing keys, packaging scripts, and deployment automation are produced by the official Develastic release pipeline. Public source access does not grant redistribution, hosted-service, MSP, OEM, white-label, or public-fork rights.
 
-## Official installation and upgrades
+## Install Community Alpha
 
-Use the published product site for supported installation and upgrade instructions:
+ShellOrchestra is currently published as a Community Alpha preview. Pro subscriptions, registration tokens, and edition upgrades are not available to order yet.
 
-- Docker install and upgrade: <https://shellorchestra.com/docs/docker-install>
-- Windows app install and upgrade: <https://shellorchestra.com/docs/windows-install>
+### Recommended Docker install
+
+Run this on the Linux controller host that will run ShellOrchestra:
+
+```bash
+curl -fsSL https://shellorchestra.com/install/docker-install.sh | sudo sh
+```
+
+The official installer expects Docker Engine and Docker Compose to already be installed. It verifies the signed alpha release manifest and Docker artifact before creating the managed `/opt/shellorchestra` layout and starting the Docker Compose stack.
+
+### Windows app preview
+
+For a Docker-free local Windows controller, download the signed Windows app installer from the Community Alpha download page:
+
+<https://shellorchestra.com/pricing/#community-downloads>
+
+### Manual/offline install
+
+The Docker bundle in GitHub Releases is the artifact used by the installer. Download it directly only for audited offline or manual deployments. Use the verifier script before unpacking any artifact:
+
+```bash
+curl -fsSL https://shellorchestra.com/install/verify-release.sh | sh
+```
+
+Full install and upgrade notes:
+
+- Docker install and upgrade: <https://shellorchestra.com/docs/docker-install.md>
+- Windows app install and upgrade: <https://shellorchestra.com/docs/windows-install.md>
 - License: <https://shellorchestra.com/legal/license>
 
 Official installers verify signed release metadata and artifacts before applying changes.
