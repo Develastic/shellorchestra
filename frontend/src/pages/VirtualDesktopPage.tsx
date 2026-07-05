@@ -1381,7 +1381,7 @@ function DesktopFrame({ children, server, status, wallpaper = '', wallpapers = [
           ? `linear-gradient(rgba(7,16,6,0.42), rgba(7,16,6,0.62)), url(${wallpaperImage}) center / cover no-repeat`
           : 'radial-gradient(circle at 15% 18%, rgba(0,255,65,0.16), transparent 28%), radial-gradient(circle at 80% 12%, rgba(171,199,255,0.16), transparent 25%), linear-gradient(145deg, #071006 0%, #0f150e 48%, #1b211a 100%)',
         color: 'text.primary',
-        fontFamily: 'IBM Plex Sans, system-ui, sans-serif',
+        fontFamily: 'Segoe UI, Inter, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif',
       }}
     >
       <Box sx={{ position: 'absolute', inset: 0, opacity: 0.22, backgroundImage: 'linear-gradient(rgba(222,229,217,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(222,229,217,0.04) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
@@ -1407,7 +1407,7 @@ function DesktopFrame({ children, server, status, wallpaper = '', wallpapers = [
           }}
         >
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center', minWidth: 0 }}>
-            <Typography noWrap sx={{ flex: 1, minWidth: 0, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{server.name}</Typography>
+            <Typography noWrap sx={{ flex: 1, minWidth: 0, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{server.name}</Typography>
             <StatusPill state={status?.state ?? 'disconnected'} />
           </Stack>
           <Typography variant="caption" color="text.secondary" noWrap sx={{ minWidth: 0, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -1540,7 +1540,7 @@ function ConnectionLostDialog({
           <Alert severity="warning" variant="outlined">
             ShellOrchestra is retrying the managed SSH connection automatically. You can leave this desktop open and wait, or close it now.
           </Alert>
-          <Stack spacing={0.5} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, color: 'text.secondary' }}>
+          <Stack spacing={0.5} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, color: 'text.secondary' }}>
             <Box component="div">Server: {server.name} · {serverEndpoint(server)}</Box>
             <Box component="div">State: {issue.state}</Box>
             <Box component="div">Retry: {issue.retryText}</Box>
@@ -1729,7 +1729,7 @@ function DesktopAppWindow({
       <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', minHeight: { xs: 34, sm: 38 }, px: { xs: 0.75, sm: 1 }, borderBottom: '1px solid', borderColor: 'divider', bgcolor: 'rgba(48,55,47,0.72)' }}>
         <Stack onPointerDown={state.maximized || mobile ? undefined : onBeginMove} direction="row" spacing={1} sx={{ alignItems: 'center', minWidth: 0, flex: 1, cursor: state.maximized || mobile ? 'default' : 'move', userSelect: 'none' }}>
           {iconForWindow(state)}
-          <Typography noWrap sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{displayTitle}</Typography>
+          <Typography noWrap sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{displayTitle}</Typography>
         </Stack>
         <Stack direction="row" spacing={0.5} onMouseDown={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()}>
           <Box sx={{ position: 'relative', display: 'inline-flex' }}>
@@ -2188,7 +2188,7 @@ function DesktopWindowMenuPanel({
         <Stack spacing={1.35}>
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ minWidth: 0 }}>
-              <Typography variant="caption" color="primary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, letterSpacing: '0.12em' }}>WINDOW MENU</Typography>
+              <Typography variant="caption" color="primary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, letterSpacing: '0.12em' }}>WINDOW MENU</Typography>
               <Typography sx={{ fontWeight: 900 }} noWrap>{windowState.title}</Typography>
             </Box>
             <IconButton size="small" onClick={onClose} aria-label="Close window menu"><CloseIcon fontSize="small" /></IconButton>
@@ -2344,7 +2344,7 @@ function InstallRunProgress({ run, refreshing, error }: { run: ScriptRun; refres
               <Typography variant="caption" color={stage.active ? 'primary' : stage.done ? 'text.primary' : 'text.secondary'} sx={{ fontWeight: stage.active ? 900 : 600 }}>
                 {stage.label}
               </Typography>
-              <Typography variant="caption" color={stage.active ? 'primary' : stage.done ? 'success.main' : 'text.secondary'} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+              <Typography variant="caption" color={stage.active ? 'primary' : stage.done ? 'success.main' : 'text.secondary'} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
                 {stage.active ? 'active' : stage.done ? 'done' : 'pending'}
               </Typography>
             </Stack>
@@ -2361,7 +2361,7 @@ function InstallRunProgress({ run, refreshing, error }: { run: ScriptRun; refres
           border: '1px solid',
           borderColor: 'divider',
           bgcolor: 'rgba(10,16,9,0.38)',
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         }}
       >
         <Typography variant="caption" color="text.secondary">Run ID</Typography>
@@ -2430,7 +2430,7 @@ function ServerConky({ server, status }: { server: Server; status?: ServerStatus
       <Stack spacing={1.2}>
         <Box>
           <Typography variant="caption" color="primary" sx={{ fontWeight: 900, letterSpacing: '0.12em' }}>SERVER MONITOR</Typography>
-          <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{server.name}</Typography>
+          <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{server.name}</Typography>
           <Typography variant="caption" color="text.secondary">{serverEndpoint(server)}</Typography>
         </Box>
         <Divider />
@@ -2471,7 +2471,7 @@ function ConkyLine({ label, value }: { label: string; value: string }) {
   return (
     <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between', gap: 2 }}>
       <Typography variant="caption" color="text.secondary">{label}</Typography>
-      <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', textAlign: 'right' }}>{value || '—'}</Typography>
+      <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', textAlign: 'right' }}>{value || '—'}</Typography>
     </Stack>
   );
 }
@@ -2481,7 +2481,7 @@ function ConkyMetric({ title, value, detail, children }: { title: string; value:
     <Stack spacing={0.5}>
       <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
         <Typography variant="caption" color="primary" sx={{ fontWeight: 900, letterSpacing: '0.12em' }}>{title}</Typography>
-        <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{value}</Typography>
+        <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{value}</Typography>
       </Stack>
       {children}
       <Typography variant="caption" color="text.secondary">{detail}</Typography>
@@ -2522,7 +2522,7 @@ function FilesystemUsage({ filesystem }: { filesystem: FileSystemTelemetry }) {
   return (
     <Stack spacing={0.35}>
       <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{filesystem.mount}</Typography>
+        <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{filesystem.mount}</Typography>
         <Typography variant="caption" color="text.secondary">{formatPercent(filesystem.use_percent)}</Typography>
       </Stack>
       <UsageBar value={filesystem.use_percent} />
@@ -2592,7 +2592,7 @@ function TaskbarWindowButton({
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           fontSize: '0.75rem',
           lineHeight: 1.66,
           fontWeight: 900,
@@ -3525,13 +3525,13 @@ function DesktopTaskbarTrayIdentity({ server, status }: { server: Server; status
           <Stack direction="row" spacing={0.75} sx={{ width: '100%', minWidth: 0, alignItems: 'center', overflow: 'hidden' }}>
             <DetectedOSIcon asset={osIcon} size={28} surface="transparent" />
             <Stack spacing={0} sx={{ minWidth: 0, alignItems: 'flex-start', justifyContent: 'center', lineHeight: 1, overflow: 'hidden' }}>
-              <Typography data-testid="desktop-taskbar-tray-line-login" variant="caption" noWrap sx={{ width: '100%', color: 'primary.main', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, lineHeight: 1.05 }}>
+              <Typography data-testid="desktop-taskbar-tray-line-login" variant="caption" noWrap sx={{ width: '100%', color: 'primary.main', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, lineHeight: 1.05 }}>
                 {loginLabel}
               </Typography>
-              <Typography data-testid="desktop-taskbar-tray-line-server" variant="caption" noWrap sx={{ width: '100%', color: 'text.primary', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, lineHeight: 1.05 }}>
+              <Typography data-testid="desktop-taskbar-tray-line-server" variant="caption" noWrap sx={{ width: '100%', color: 'text.primary', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, lineHeight: 1.05 }}>
                 {server.name}
               </Typography>
-              <Typography data-testid="desktop-taskbar-tray-line-os" variant="caption" noWrap sx={{ width: '100%', color: 'text.secondary', fontFamily: 'JetBrains Mono, ui-monospace, monospace', lineHeight: 1.05 }}>
+              <Typography data-testid="desktop-taskbar-tray-line-os" variant="caption" noWrap sx={{ width: '100%', color: 'text.secondary', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', lineHeight: 1.05 }}>
                 {osLabel}
               </Typography>
             </Stack>
@@ -3615,7 +3615,7 @@ function TrayFact({ label, value }: { label: string; value: string }) {
   return (
     <Box>
       <Typography variant="caption" color="text.secondary">{label}</Typography>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
     </Box>
   );
 }

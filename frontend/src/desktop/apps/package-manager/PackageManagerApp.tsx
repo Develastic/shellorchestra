@@ -323,7 +323,7 @@ function PackageInfoPanel({ info, query, manager, loading }: { info: string; que
         <PackageInfoSection title="Homepage and source links" fields={parsed.links} emptyText="No homepage, URL, or source fields were detected." />
         <PackageInfoSection title="Checksums" fields={parsed.checksums} emptyText="No checksum or digest fields were detected." />
         <PackageInfoSection title="Raw package-manager details" defaultExpanded={false}>
-          <Typography component="pre" sx={{ m: 0, p: 1, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.55 }}>
+          <Typography component="pre" sx={{ m: 0, p: 1, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.55 }}>
             {parsed.raw}
           </Typography>
         </PackageInfoSection>
@@ -388,7 +388,7 @@ function PackageInfoSection({
           '&:focus-visible': { outline: '1px solid', outlineColor: 'primary.main', outlineOffset: -1 },
         }}
       >
-        <Typography aria-hidden="true" component="span" sx={{ width: 16, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1 }}>
+        <Typography aria-hidden="true" component="span" sx={{ width: 16, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1 }}>
           {expanded ? '▾' : '▸'}
         </Typography>
         <Typography variant="caption" sx={{ fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
@@ -419,7 +419,7 @@ function PackageInfoFieldRow({ field }: { field: PackageInfoField }) {
       <Typography variant="caption" sx={{ px: 1, py: 0.6, color: 'text.secondary', fontWeight: 800, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.14)' }}>
         {field.label}
       </Typography>
-      <Typography variant="caption" sx={{ px: 1, py: 0.6, fontFamily: 'JetBrains Mono, ui-monospace, monospace', borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.14)', overflowWrap: 'anywhere', whiteSpace: 'pre-wrap' }}>
+      <Typography variant="caption" sx={{ px: 1, py: 0.6, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.14)', overflowWrap: 'anywhere', whiteSpace: 'pre-wrap' }}>
         {field.value || '—'}
       </Typography>
     </>
@@ -597,10 +597,10 @@ function PackageTable({
                   <Mono strong title={entry.name}>{entry.name}</Mono>
                   {showStateColumn && <Box>{packageStateChip(entry, showSecurityColumns)}</Box>}
                 </Stack>
-                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>Version: {entry.version || '—'}</Typography>
-                {showSecurityColumns && <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>Severity: {entry.severity || '—'} · Advisory: {entry.advisory || '—'}</Typography>}
+                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>Version: {entry.version || '—'}</Typography>
+                {showSecurityColumns && <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>Severity: {entry.severity || '—'} · Advisory: {entry.advisory || '—'}</Typography>}
                 <Typography variant="caption" color="text.secondary" sx={{ overflowWrap: 'anywhere' }}>{entry.description || '—'}</Typography>
-                {showSecurityColumns && entry.cves.length > 0 && <Typography variant="caption" color="warning.main" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{entry.cves.join(', ')}</Typography>}
+                {showSecurityColumns && entry.cves.length > 0 && <Typography variant="caption" color="warning.main" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{entry.cves.join(', ')}</Typography>}
               </Stack>
             </Box>
           );
@@ -830,9 +830,9 @@ function textFromResult(value: unknown): string {
 }
 
 function Header({ children }: { children: string }) {
-  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
+  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
 }
 
 function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) {
-  return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>;
+  return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>;
 }

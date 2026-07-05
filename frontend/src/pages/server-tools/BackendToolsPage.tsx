@@ -95,7 +95,7 @@ export function BackendToolsPage() {
                     {(status?.services ?? []).map((service) => (
                       <TableRow key={service.name} hover>
                         <TableCell>
-                          <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800 }}>{service.name}</Typography>
+                          <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800 }}>{service.name}</Typography>
                           <Typography variant="caption" color="text.secondary">{service.role || '—'}</Typography>
                         </TableCell>
                         <TableCell><ServiceStateChip service={service} /></TableCell>
@@ -165,7 +165,7 @@ function BackendSummaryFact({ label, value, helper }: { label: string; value: st
   return (
     <Box sx={{ minWidth: 0, p: 1.25, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.52)' }}>
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</Typography>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value}</Typography>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value}</Typography>
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>{helper}</Typography>
     </Box>
   );
@@ -178,7 +178,7 @@ function ResourceMeter({ label, value, max, muted }: { label: string; value: num
   const percent = Math.max(0, Math.min(100, (safeValue / safeMax) * 100));
   return (
     <Box sx={{ minWidth: 128 }}>
-      <Typography variant="body2" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>
+      <Typography variant="body2" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>
         {label}
       </Typography>
       <Box sx={{ mt: 0.5, height: 6, overflow: 'hidden', bgcolor: 'rgba(132,150,126,0.18)', border: '1px solid', borderColor: 'rgba(132,150,126,0.22)' }}>
@@ -223,7 +223,7 @@ function BackendServiceCards({ services }: { services: BackendServiceStatus[] })
             <Stack spacing={1.1}>
               <Stack direction="row" spacing={1} sx={{ alignItems: 'flex-start', justifyContent: 'space-between', minWidth: 0 }}>
                 <Box sx={{ minWidth: 0 }}>
-                  <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{service.name}</Typography>
+                  <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{service.name}</Typography>
                   <Typography variant="caption" color="text.secondary">{service.role || '—'}</Typography>
                 </Box>
                 <ServiceStateChip service={service} />
@@ -249,7 +249,7 @@ function BackendServiceFact({ label, value }: { label: string; value: string }) 
   return (
     <Box sx={{ minWidth: 0 }}>
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontWeight: 800 }}>{label}</Typography>
-      <Typography variant="caption" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value}</Typography>
+      <Typography variant="caption" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{value}</Typography>
     </Box>
   );
 }

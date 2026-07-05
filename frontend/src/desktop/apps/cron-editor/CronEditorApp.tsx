@@ -304,12 +304,12 @@ function ValidationIssueList({ issues }: { issues: CronEditorPayload['errors'] }
   return (
     <Box component="ul" sx={{ m: 0, pl: 2.25 }}>
       {visibleIssues.map((issue, index) => (
-        <Box key={`${issue.line}-${issue.message}-${index}`} component="li" data-testid="cron-validation-issue" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.55 }}>
+        <Box key={`${issue.line}-${issue.message}-${index}`} component="li" data-testid="cron-validation-issue" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.55 }}>
           Line {issue.line || '—'}: {issue.message}
         </Box>
       ))}
       {issues.length > visibleIssues.length && (
-        <Box component="li" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.55 }}>
+        <Box component="li" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.55 }}>
           {issues.length - visibleIssues.length} more issue(s) hidden.
         </Box>
       )}

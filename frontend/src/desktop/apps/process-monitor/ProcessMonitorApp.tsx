@@ -246,7 +246,7 @@ function ProcessTable({
                   <MobileProcessFact label="Disk" value={formatProcessDiskIO(process)} />
                   <MobileProcessFact label="Net" value={formatProcessNetwork(process)} />
                 </Box>
-                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{process.command || '—'}</Typography>
+                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{process.command || '—'}</Typography>
               </Stack>
             </Box>
           );
@@ -281,7 +281,7 @@ function ProcessTable({
 
 function MobileProcessFact({ label, value }: { label: string; value: string }) {
   return (
-    <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+    <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
       {label}: {value}
     </Typography>
   );
@@ -460,11 +460,11 @@ function SortableHeader({ label, column, active, direction, onSort }: { label: s
 }
 
 function Header({ children }: { children: string }) {
-  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
+  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
 }
 
 function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) {
-  return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>;
+  return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>;
 }
 
 const processDialogPaperSx = {
@@ -479,8 +479,8 @@ const processDialogPaperSx = {
 function ProcessDetailFact({ label, value }: { label: string; value: string }) {
   return (
     <Box sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.54)', px: 1.25, py: 0.9 }}>
-      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
-      <Typography sx={{ mt: 0.35, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 13, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
+      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
+      <Typography sx={{ mt: 0.35, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 13, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
     </Box>
   );
 }

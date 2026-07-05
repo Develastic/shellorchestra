@@ -234,7 +234,7 @@ function KeyboardButton({
         borderColor: active ? '#72ff70' : 'rgba(185,204,178,0.28)',
         color: active ? '#002203' : '#dee5d9',
         bgcolor: active ? '#72ff70' : 'rgba(48,55,47,0.78)',
-        fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+        fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         fontSize: ordinary ? 'clamp(18px, 6.2vw, 37px)' : (compact ? 'clamp(9px, 2.55vw, 12px)' : 12),
         lineHeight: ordinary ? 0.92 : 1.1,
         fontWeight: ordinary ? 1000 : 900,

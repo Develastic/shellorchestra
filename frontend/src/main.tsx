@@ -1026,7 +1026,7 @@ function RuntimeUnlockDialog({
                   borderRadius: 1,
                   bgcolor: 'rgba(10,16,9,0.82)',
                   color: 'text.secondary',
-                  fontFamily: 'JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace',
+                  fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
                   fontSize: '0.76rem',
                   lineHeight: 1.6,
                   maxHeight: 240,
@@ -1218,7 +1218,7 @@ function SafeQrCode({ value, label }: { value: string; label: string }) {
           slotProps={{
             input: {
               readOnly: true,
-              sx: { fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: '0.82rem' },
+              sx: { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: '0.82rem' },
             },
           }}
           helperText={error instanceof Error ? error.message : 'QR rendering failed.'}
@@ -1771,7 +1771,7 @@ function RouteLoading({ label, fullScreen = false, compact = false }: { label: s
     >
       <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center', p: compact ? 1.5 : 2, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.78)' }}>
         <CircularProgress size={18} />
-        <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{label}</Typography>
+        <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{label}</Typography>
       </Stack>
     </Box>
   );

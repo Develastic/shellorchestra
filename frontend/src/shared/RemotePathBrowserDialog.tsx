@@ -136,8 +136,8 @@ export function RemotePathBrowserDialog({
                     {entry.isDirectory ? <FolderOutlinedIcon fontSize="small" /> : <InsertDriveFileOutlinedIcon fontSize="small" />}
                   </Box>
                   <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{entry.name || entry.path}</Typography>
-                    <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+                    <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{entry.name || entry.path}</Typography>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
                       {entry.isDirectory ? 'folder' : formatBytes(entry.size)} · {entry.mode || 'mode unknown'}
                     </Typography>
                   </Box>

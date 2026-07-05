@@ -385,7 +385,7 @@ function SpeedTestRunningPanel({
             </Box>
           </Stack>
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: { xs: 'flex-start', sm: 'flex-end' }, flexWrap: 'wrap' }}>
-            <Typography variant="caption" color="primary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, whiteSpace: 'nowrap' }}>
+            <Typography variant="caption" color="primary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, whiteSpace: 'nowrap' }}>
               Elapsed {formatElapsed(elapsedMs)} · {formatPercent(percent)} · {formatBytesCompact(totalBytes)} / {formatBytesCompact(totalTargetBytes || payloadMB * 1024 * 1024)}
             </Typography>
             <DesktopAppButton size="small" variant="outlined" color="warning" disabled={canceling || !job?.supports_cancel} onClick={onCancel} sx={{ minHeight: 30, px: 1.25 }}>
@@ -410,7 +410,7 @@ function StreamLane({ progress, fallbackIndex }: { progress: SpeedTestWorkerProg
   const state = String(progress.state || 'queued');
   return (
     <Box data-testid="speed-test-stream-lane" sx={{ display: 'grid', gridTemplateColumns: '72px 1fr 170px', gap: 0.75, alignItems: 'center', p: 0.75, border: '1px solid rgba(132,150,126,0.22)', bgcolor: 'rgba(15,21,14,0.56)' }}>
-      <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>#{index}</Typography>
+      <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>#{index}</Typography>
       <Box sx={{ position: 'relative', height: 8, overflow: 'hidden', bgcolor: 'rgba(48,55,47,0.9)' }}>
         <Box
           sx={{
@@ -426,7 +426,7 @@ function StreamLane({ progress, fallbackIndex }: { progress: SpeedTestWorkerProg
           }}
         />
       </Box>
-      <Typography variant="caption" color={state === 'failed' ? 'error.main' : 'primary'} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textAlign: 'right' }}>
+      <Typography variant="caption" color={state === 'failed' ? 'error.main' : 'primary'} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textAlign: 'right' }}>
         {formatPercent(percent)} · {formatBytesCompact(Number(progress.bytes) || 0)}
       </Typography>
     </Box>
@@ -455,13 +455,13 @@ function SpeedTestResultPanel({ result }: { result: SpeedTestResultPayload }) {
         <Box sx={{ minWidth: 560 }}>
           <Box sx={{ display: 'grid', gridTemplateColumns: '72px minmax(110px, 1fr) minmax(110px, 1fr) minmax(120px, 1.2fr)', gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>
             {['Stream', 'Transferred', 'Rate', 'Status'].map((header) => (
-              <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>
+              <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>
                 {header}
               </Typography>
             ))}
           </Box>
           {(result.workers ?? []).map((worker, index) => (
-            <Box key={worker.index ?? index} sx={{ display: 'grid', gridTemplateColumns: '72px minmax(110px, 1fr) minmax(110px, 1fr) minmax(120px, 1.2fr)', gap: 1, px: 1, py: 0.75, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+            <Box key={worker.index ?? index} sx={{ display: 'grid', gridTemplateColumns: '72px minmax(110px, 1fr) minmax(110px, 1fr) minmax(120px, 1.2fr)', gap: 1, px: 1, py: 0.75, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
               <Typography variant="caption" sx={{ fontFamily: 'inherit', fontWeight: 900 }}>#{worker.index ?? '—'}</Typography>
               <Typography variant="caption" sx={{ fontFamily: 'inherit' }}>{formatBytesCompact(worker.bytes)}</Typography>
               <Typography variant="caption" sx={{ fontFamily: 'inherit' }}>{formatSpeed(worker.megabits_second, worker.mebibytes_second)}</Typography>
@@ -481,7 +481,7 @@ function SpeedTestHistoryPanel({ results }: { results: SpeedTestResultPayload[] 
     <Box data-testid="speed-test-history-panel" sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.58)' }}>
       <Box sx={{ display: 'grid', gridTemplateColumns: '112px minmax(120px, 1fr) minmax(150px, 1fr) minmax(120px, 1fr)', gap: 1, px: 1, py: 0.75, borderBottom: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.94)' }}>
         {['Run', 'Direction', 'Rate', 'Completed'].map((header) => (
-          <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>
+          <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>
             {header}
           </Typography>
         ))}
@@ -500,7 +500,7 @@ function SpeedTestHistoryPanel({ results }: { results: SpeedTestResultPayload[] 
               borderTop: index === 0 ? 0 : '1px solid',
               borderColor: 'rgba(132,150,126,0.18)',
               bgcolor: index === 0 ? 'rgba(0,255,65,0.055)' : 'transparent',
-              fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+              fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
             }}
           >
             <Typography variant="caption" sx={{ fontFamily: 'inherit', fontSize: 12, fontWeight: 900 }}>{index === 0 ? 'Current result' : `Previous #${index}`}</Typography>

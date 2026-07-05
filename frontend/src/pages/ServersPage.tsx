@@ -689,7 +689,7 @@ export function ServersPage({
                             <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center', minWidth: 0 }}>
                               <OSIcon server={row.server} telemetry={row.status?.telemetry} />
                               <Box sx={{ minWidth: 0 }}>
-                                <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800 }} noWrap>{row.server.name}</Typography>
+                                <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800 }} noWrap>{row.server.name}</Typography>
                                 <Typography variant="caption" color="text.secondary" noWrap>{formatEndpoint(row.server)}</Typography>
                               </Box>
                             </Stack>
@@ -788,7 +788,7 @@ export function ServersPage({
                   bgcolor: '#020602',
                   border: '1px solid',
                   borderColor: 'divider',
-                  fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+                  fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
                   fontSize: 12,
                   lineHeight: 1.55,
                 }}
@@ -1673,7 +1673,7 @@ function VulnerabilityMetricBox({
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         {label}
       </Typography>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 950, color: 'primary.light', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 950, color: 'primary.light', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {value}
       </Typography>
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -1894,7 +1894,7 @@ function VulnerabilityScanProgressStep({
               borderColor: 'rgba(0,255,65,0.24)',
               bgcolor: 'rgba(0,0,0,0.55)',
               color: 'primary.light',
-              fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+              fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
               fontSize: 12,
               lineHeight: 1.55,
               whiteSpace: 'pre-wrap',
@@ -2598,10 +2598,10 @@ function BatchActionResultDialog({ result, onClose }: { result: ServerBatchActio
             {rows.map(({ item, liveRun }) => (
               <Stack key={`${item.server_id}-${item.run?.id ?? item.error ?? 'result'}`} direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ justifyContent: 'space-between' }}>
                 <Stack spacing={0.5} sx={{ minWidth: 0 }}>
-                  <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800 }}>
+                  <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800 }}>
                     {item.server_name || item.server_id}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+                  <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
                     {liveRun?.id ? `run ${liveRun.id}` : item.error ? 'not started' : 'accepted'}
                   </Typography>
                 </Stack>
@@ -2614,7 +2614,7 @@ function BatchActionResultDialog({ result, onClose }: { result: ServerBatchActio
                       onToggle={() => setExpandedPackageRuns((current) => ({ ...current, [liveRun.id]: !current[liveRun.id] }))}
                     />
                   ) : (
-                    <Typography color={item.error || liveRun?.state === 'failed' ? 'error' : 'text.primary'} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', textAlign: { xs: 'left', sm: 'right' }, overflowWrap: 'anywhere' }}>
+                    <Typography color={item.error || liveRun?.state === 'failed' ? 'error' : 'text.primary'} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', textAlign: { xs: 'left', sm: 'right' }, overflowWrap: 'anywhere' }}>
                       {formatBatchRunOutcome(result?.command ?? '', item, liveRun)}
                     </Typography>
                   )}
@@ -2636,7 +2636,7 @@ function PackageUpgradeResultBlock({ run, expanded, onToggle }: { run: ScriptRun
   const canExpand = details.packages.length > 0 || Boolean(details.preview);
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: 480 }, textAlign: { xs: 'left', sm: 'right' } }}>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>
         {packageUpgradeSummary(details)}
       </Typography>
       {canExpand && (
@@ -2661,7 +2661,7 @@ function PackageUpgradeResultBlock({ run, expanded, onToggle }: { run: ScriptRun
               <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
                 Package-manager output preview
               </Typography>
-              <Typography component="pre" sx={{ m: 0, mt: 0.5, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>
+              <Typography component="pre" sx={{ m: 0, mt: 0.5, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>
                 {details.preview}
               </Typography>
             </Box>
@@ -3217,7 +3217,7 @@ function HostKeyReviewDialog({
               : 'ShellOrchestra stores SSH host keys so it can recognize this server before every login. This protects you from connecting to a different machine by mistake.'}
           </Alert>
           {server && (
-            <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+            <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
               {formatEndpoint(server)}
             </Typography>
           )}
@@ -3229,7 +3229,7 @@ function HostKeyReviewDialog({
           {scan?.verbose.length ? (
             <Box>
               <Typography variant="caption" color="text.secondary">Diagnostic log</Typography>
-              <Box component="pre" sx={{ whiteSpace: 'pre-wrap', overflowX: 'auto', mt: 0.75, p: 1.5, bgcolor: '#0a1009', border: '1px solid', borderColor: 'divider', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>
+              <Box component="pre" sx={{ whiteSpace: 'pre-wrap', overflowX: 'auto', mt: 0.75, p: 1.5, bgcolor: '#0a1009', border: '1px solid', borderColor: 'divider', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>
                 {scan.verbose.join('\n')}
               </Box>
             </Box>
@@ -3264,7 +3264,7 @@ function HostKeyList({ title, keys, emptyText }: { title: string; keys: HostKeyI
           {keys.map((key, index) => (
             <Box key={`${key.type}-${key.sha256}-${index}`} sx={{ minWidth: 0 }}>
               <Typography variant="caption" color="text.secondary">{key.type}</Typography>
-              <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{key.sha256}</Typography>
+              <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{key.sha256}</Typography>
             </Box>
           ))}
         </Stack>
@@ -3508,7 +3508,7 @@ function CriticalHostBadges({ row }: { row: ServerRow }) {
             size="small"
             color={badge.color}
             variant={badge.value === 'detecting' || badge.value === 'no' ? 'outlined' : 'filled'}
-            sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800, maxWidth: '100%' }}
+            sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800, maxWidth: '100%' }}
           />
         ))}
       </Stack>
@@ -3621,7 +3621,7 @@ function renderDetailValue(value: ReactNode) {
   }
   if (typeof value === 'string' || typeof value === 'number') {
     return (
-      <Typography variant="body2" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere', fontVariantNumeric: 'tabular-nums' }}>
+      <Typography variant="body2" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere', fontVariantNumeric: 'tabular-nums' }}>
         {value}
       </Typography>
     );
@@ -3771,7 +3771,7 @@ function CPUBarHistory({ values, latest }: { values: number[]; latest: number | 
             top: 2,
             left: 5,
             zIndex: 1,
-            fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+            fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
             fontWeight: 900,
             fontSize: 11,
             lineHeight: '14px',
@@ -3833,7 +3833,7 @@ function expandCPUHistoryValues(values: number[], pointCount: number): Array<num
 
 function StableMonoValue({ value }: { value: string }) {
   return (
-    <Typography variant="body2" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontVariantNumeric: 'tabular-nums', minWidth: 88, whiteSpace: 'nowrap' }}>
+    <Typography variant="body2" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontVariantNumeric: 'tabular-nums', minWidth: 88, whiteSpace: 'nowrap' }}>
       {value}
     </Typography>
   );
@@ -3843,7 +3843,7 @@ function StatusLineItem({ label, value, tone = 'text.primary' }: { label: string
   return (
     <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
       <Typography variant="caption" color="text.secondary">{label}</Typography>
-      <Typography variant="caption" sx={{ color: tone, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800 }}>{value}</Typography>
+      <Typography variant="caption" sx={{ color: tone, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800 }}>{value}</Typography>
     </Stack>
   );
 }
@@ -3903,7 +3903,7 @@ function ServerMobileList({
                   />
                   <OSIcon server={row.server} telemetry={row.status?.telemetry} />
                   <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{row.server.name}</Typography>
+                    <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{row.server.name}</Typography>
                     <Typography variant="caption" color="text.secondary" sx={{ display: 'block', overflowWrap: 'anywhere' }}>{formatEndpoint(row.server)}</Typography>
                   </Box>
                   <ConnectionIndicator state={row.statusState} lastError={row.status?.last_error} />

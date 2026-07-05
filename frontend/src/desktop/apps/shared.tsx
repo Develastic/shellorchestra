@@ -15,7 +15,7 @@ export function AppFact({ label, value, action }: { label: string; value: string
     <Box sx={{ p: 1, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.46)' }}>
       <Typography variant="caption" color="text.secondary">{label}</Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, minWidth: 0 }}>
-        <Typography title={displayValue} sx={{ flex: 1, minWidth: 0, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{displayValue}</Typography>
+        <Typography title={displayValue} sx={{ flex: 1, minWidth: 0, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{displayValue}</Typography>
         {action}
       </Box>
     </Box>

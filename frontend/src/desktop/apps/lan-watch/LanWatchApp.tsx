@@ -220,7 +220,7 @@ function ScanScopePreview({ payload, loading }: { payload: LanWatchPayload; load
       title={title}
     >
       <Stack spacing={0.15} sx={{ minWidth: 0 }}>
-        <Typography variant="caption" sx={{ color: 'primary.main', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
+        <Typography variant="caption" sx={{ color: 'primary.main', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
           Scan preview
         </Typography>
         <Typography variant="caption" color="text.secondary" sx={{ lineHeight: 1.25 }}>
@@ -285,7 +285,7 @@ function LanHostDetailsPanel({ host }: { host: LanHost | null }) {
           <Detail label="SSH probe" value={host.sshOpen ? 'TCP/22 open; SSH banner detected' : 'No SSH banner detected'} />
           <Box>
             <Header>SSH banner</Header>
-            <Typography data-testid="lan-watch-details-banner" component="pre" sx={{ mt: 0.5, m: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, color: host.sshBanner ? 'text.primary' : 'text.secondary', bgcolor: 'rgba(15,21,14,0.72)', border: '1px solid', borderColor: 'rgba(132,150,126,0.22)', p: 1 }}>
+            <Typography data-testid="lan-watch-details-banner" component="pre" sx={{ mt: 0.5, m: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, color: host.sshBanner ? 'text.primary' : 'text.secondary', bgcolor: 'rgba(15,21,14,0.72)', border: '1px solid', borderColor: 'rgba(132,150,126,0.22)', p: 1 }}>
               {redactDebugScreenshotText(host.sshBanner || 'No SSH banner text was reported for this host.')}
             </Typography>
           </Box>
@@ -295,8 +295,8 @@ function LanHostDetailsPanel({ host }: { host: LanHost | null }) {
   );
 }
 function Detail({ label, value, strong = false }: { label: string; value: string; strong?: boolean }) { return <Box><Header>{label}</Header><Mono strong={strong} title={value}>{value}</Mono></Box>; }
-function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
-function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
+function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
+function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
 
 function DetectedOSCell({ host }: { host: LanHost }) {
   const label = host.detectedOSLabel || 'Unknown';

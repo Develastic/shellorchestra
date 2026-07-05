@@ -179,7 +179,7 @@ export function PVEManagerApp({ server, status, windowState, openTerminalApp }: 
                     onClick={() => setSelectedGuest(guest)}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{guest.vmid}</TableCell>
+                    <TableCell sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{guest.vmid}</TableCell>
                     <TableCell>{guest.name}</TableCell>
                     <TableCell>{guest.typeLabel()}</TableCell>
                     <TableCell><Chip size="small" color={guest.statusTone()} variant="outlined" label={guest.status} /></TableCell>

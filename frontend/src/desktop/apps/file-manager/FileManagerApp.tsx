@@ -1599,7 +1599,7 @@ function LocationsPanel({
           {!collapsed && (
             <Stack sx={{ minWidth: 0, alignItems: 'flex-start', ml: 0.75 }}>
               <Typography variant="caption" noWrap sx={{ maxWidth: 150, fontWeight: 900 }}>{location.label}</Typography>
-              <Typography variant="caption" color="text.secondary" noWrap sx={{ maxWidth: 150, fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{location.path}</Typography>
+              <Typography variant="caption" color="text.secondary" noWrap sx={{ maxWidth: 150, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{location.path}</Typography>
             </Stack>
           )}
         </DesktopAppButton>
@@ -1638,7 +1638,7 @@ function FileManagerEntryContextMenu({ actions, state, onClose }: { actions: Des
             <ListSubheader
               key={entry.key}
               disableSticky
-              sx={{ bgcolor: 'transparent', color: 'primary.main', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.9, lineHeight: 2.25, textTransform: 'uppercase' }}
+              sx={{ bgcolor: 'transparent', color: 'primary.main', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.9, lineHeight: 2.25, textTransform: 'uppercase' }}
             >
               {entry.label}
             </ListSubheader>
@@ -1946,7 +1946,7 @@ function EntriesTable({
             borderColor: uploadDropDisabledReason ? 'warning.main' : 'primary.main',
             bgcolor: uploadDropDisabledReason ? 'rgba(40,24,0,0.92)' : 'rgba(0,34,3,0.92)',
             color: uploadDropDisabledReason ? 'warning.light' : 'primary.main',
-            fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+            fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
             fontSize: 12,
             fontWeight: 900,
             pointerEvents: 'none',
@@ -1956,7 +1956,7 @@ function EntriesTable({
         </Box>
       )}
       {!mobile && <Box data-testid="file-manager-table-header" sx={{ display: 'grid', gridTemplateColumns: grid, gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>
-        {headers.map((header) => <DesktopAppButton key={header.key} size="small" variant="text" onClick={() => onSort(header.key)} sx={{ justifyContent: 'flex-start', p: 0, minWidth: 0, color: 'text.secondary', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{header.label}{sortKey === header.key ? (sortDirection === 'asc' ? ' ↑' : ' ↓') : ''}</DesktopAppButton>)}
+        {headers.map((header) => <DesktopAppButton key={header.key} size="small" variant="text" onClick={() => onSort(header.key)} sx={{ justifyContent: 'flex-start', p: 0, minWidth: 0, color: 'text.secondary', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{header.label}{sortKey === header.key ? (sortDirection === 'asc' ? ' ↑' : ' ↓') : ''}</DesktopAppButton>)}
       </Box>}
       {loading && (
         <Stack direction="row" spacing={1} sx={{ p: 2, alignItems: 'center' }}>
@@ -1970,7 +1970,7 @@ function EntriesTable({
         const selected = selectedPathSet.has(entry.path);
         if (mobile) {
           return (
-            <Box data-testid="file-manager-entry-row" data-file-path={entry.path} data-file-type={entry.type} data-selected={selected ? 'true' : 'false'} data-focused={entry.path === selectedPath ? 'true' : 'false'} key={`${entry.path}:${entry.type}`} onMouseDown={(event) => { if (event.detail > 1) event.preventDefault(); }} onClick={(event) => { tableRef.current?.focus(); onSelect(entry, event); }} onDoubleClick={(event) => { event.preventDefault(); tableRef.current?.focus(); onSelect(entry, event); onOpen(entry); }} onContextMenu={(event) => { tableRef.current?.focus(); onContextMenu(entry, event); }} sx={{ px: 1, py: 0.9, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: selected ? 'rgba(0,255,65,0.12)' : 'transparent', outline: entry.path === selectedPath ? '2px solid rgba(0,255,65,0.72)' : 'none', outlineOffset: -2, boxShadow: entry.path === selectedPath ? 'inset 3px 0 0 rgba(0,255,65,0.86)' : 'none', cursor: 'default', userSelect: 'none', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>
+            <Box data-testid="file-manager-entry-row" data-file-path={entry.path} data-file-type={entry.type} data-selected={selected ? 'true' : 'false'} data-focused={entry.path === selectedPath ? 'true' : 'false'} key={`${entry.path}:${entry.type}`} onMouseDown={(event) => { if (event.detail > 1) event.preventDefault(); }} onClick={(event) => { tableRef.current?.focus(); onSelect(entry, event); }} onDoubleClick={(event) => { event.preventDefault(); tableRef.current?.focus(); onSelect(entry, event); onOpen(entry); }} onContextMenu={(event) => { tableRef.current?.focus(); onContextMenu(entry, event); }} sx={{ px: 1, py: 0.9, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: selected ? 'rgba(0,255,65,0.12)' : 'transparent', outline: entry.path === selectedPath ? '2px solid rgba(0,255,65,0.72)' : 'none', outlineOffset: -2, boxShadow: entry.path === selectedPath ? 'inset 3px 0 0 rgba(0,255,65,0.86)' : 'none', cursor: 'default', userSelect: 'none', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>
               <Stack spacing={0.65}>
                 <Stack direction="row" spacing={0.75} sx={{ minWidth: 0, alignItems: 'center' }}>
                   {entryIcon(entry)}
@@ -1988,7 +1988,7 @@ function EntriesTable({
           );
         }
         return (
-          <Box data-testid="file-manager-entry-row" data-file-path={entry.path} data-file-type={entry.type} data-selected={selected ? 'true' : 'false'} data-focused={entry.path === selectedPath ? 'true' : 'false'} key={`${entry.path}:${entry.type}`} onMouseDown={(event) => { if (event.detail > 1) event.preventDefault(); }} onClick={(event) => { tableRef.current?.focus(); onSelect(entry, event); }} onDoubleClick={(event) => { event.preventDefault(); tableRef.current?.focus(); onSelect(entry, event); onOpen(entry); }} onContextMenu={(event) => { tableRef.current?.focus(); onContextMenu(entry, event); }} sx={{ display: 'grid', gridTemplateColumns: grid, gap: 1, alignItems: 'center', width: '100%', minWidth: '100%', boxSizing: 'border-box', px: 1, py: 0.7, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: selected ? 'rgba(0,255,65,0.12)' : 'transparent', outline: entry.path === selectedPath ? '2px solid rgba(0,255,65,0.72)' : 'none', outlineOffset: -2, boxShadow: entry.path === selectedPath ? 'inset 3px 0 0 rgba(0,255,65,0.86)' : 'none', cursor: 'default', userSelect: 'none', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>
+          <Box data-testid="file-manager-entry-row" data-file-path={entry.path} data-file-type={entry.type} data-selected={selected ? 'true' : 'false'} data-focused={entry.path === selectedPath ? 'true' : 'false'} key={`${entry.path}:${entry.type}`} onMouseDown={(event) => { if (event.detail > 1) event.preventDefault(); }} onClick={(event) => { tableRef.current?.focus(); onSelect(entry, event); }} onDoubleClick={(event) => { event.preventDefault(); tableRef.current?.focus(); onSelect(entry, event); onOpen(entry); }} onContextMenu={(event) => { tableRef.current?.focus(); onContextMenu(entry, event); }} sx={{ display: 'grid', gridTemplateColumns: grid, gap: 1, alignItems: 'center', width: '100%', minWidth: '100%', boxSizing: 'border-box', px: 1, py: 0.7, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: selected ? 'rgba(0,255,65,0.12)' : 'transparent', outline: entry.path === selectedPath ? '2px solid rgba(0,255,65,0.72)' : 'none', outlineOffset: -2, boxShadow: entry.path === selectedPath ? 'inset 3px 0 0 rgba(0,255,65,0.86)' : 'none', cursor: 'default', userSelect: 'none', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>
             <Stack direction="row" spacing={0.75} sx={{ minWidth: 0, alignItems: 'center' }}>{entryIcon(entry)}<Typography data-testid="file-manager-entry-name" variant="caption" noWrap title={entry.name} sx={{ fontFamily: 'inherit', fontWeight: 900 }}>{entry.displayName}</Typography>{entry.nameSafety !== 'safe' && <Chip size="small" color="warning" label="name" title={entry.nameSafetyReasons.join(', ') || 'Suspicious filename'} />}</Stack>
             <Typography variant="caption" sx={{ fontFamily: 'inherit', textTransform: 'lowercase' }} title={entry.extension || undefined} noWrap>{entry.extension || '—'}</Typography>
             <Typography variant="caption" sx={{ fontFamily: 'inherit' }}>{entry.isDirectory ? '—' : formatFileListBytesCompact(entry.size)}</Typography>
@@ -2258,7 +2258,7 @@ function PreviewFactsGrid({ preview, entry }: { preview: FileManagerPreview | nu
               borderColor: 'rgba(132,150,126,0.3)',
               bgcolor: 'rgba(15,21,14,0.62)',
               color: 'text.primary',
-              fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+              fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
               fontSize: 11,
               fontWeight: 900,
               overflow: 'hidden',
@@ -2309,7 +2309,7 @@ function PreviewNameField({ entry }: { entry: RemoteFileEntry }) {
         label="Selected item"
         value={entry.name}
         slotProps={{ input: { readOnly: true }, htmlInput: { title: entry.name } }}
-        sx={{ flex: 1, minWidth: 0, '& .MuiInputBase-input': { fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, fontSize: 12, textOverflow: 'ellipsis' } }}
+        sx={{ flex: 1, minWidth: 0, '& .MuiInputBase-input': { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, fontSize: 12, textOverflow: 'ellipsis' } }}
       />
       <DesktopAppIconButton size="small" aria-label="Copy selected item path" onClick={() => copyText(entry.path)}>
         <ContentCopyIcon fontSize="small" />
@@ -2342,7 +2342,7 @@ function PreviewDetailsDialog({ open, onClose, entry, preview, timing }: { open:
         {details.map(([label, value]) => (
           <Box key={label} sx={{ minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
-            <Typography variant="body2" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{value}</Typography>
+            <Typography variant="body2" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{value}</Typography>
           </Box>
         ))}
         {timing ? <DesktopAppInfoText>{previewTimingBreakdown(timing)}</DesktopAppInfoText> : null}
@@ -2618,7 +2618,7 @@ function ImageLightbox({
           </DesktopAppButton>
           <DesktopAppIconButton aria-label="Zoom image in" disabled={zoom >= 3 || Boolean(loadingSibling)} onClick={() => changeZoom(0.25)}><ZoomInIcon fontSize="small" /></DesktopAppIconButton>
         </Stack>
-        <Typography variant="caption" color="text.secondary" sx={{ flex: '0 0 72px', width: 72, textAlign: 'center', fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>
+        <Typography variant="caption" color="text.secondary" sx={{ flex: '0 0 72px', width: 72, textAlign: 'center', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>
           {images.length > 1 && currentIndex >= 0 ? `${currentIndex + 1} / ${images.length}` : ''}
         </Typography>
       </DialogTitle>
@@ -2749,7 +2749,7 @@ function SendToDialog({
           {entry ? (
             <Box sx={{ border: '1px solid', borderColor: 'divider', p: 1, bgcolor: 'rgba(10,16,9,0.34)', minWidth: 0 }}>
               <Typography variant="caption" color="text.secondary">{entries.length === 1 ? 'Source item' : `Source items (${entries.length})`}</Typography>
-              <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
+              <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
                 {entries.length === 1 ? entry.path : entries.map((item) => item.name).join(', ')}
               </Typography>
               <Typography variant="caption" color="text.secondary">
@@ -2789,7 +2789,7 @@ function SendToDialog({
           />
           {destination && entry ? (
             <Alert severity="success" variant="outlined">
-              Target: <Box component="span" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
+              Target: <Box component="span" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
                 {destination.name || destination.host}:{hasArchiveTransfer ? (state?.destinationPath ?? '') : joinPath(state?.destinationPath ?? '', entry.name)}
               </Box>
             </Alert>
@@ -2913,7 +2913,7 @@ function FileOperationDialog({
         {dialog.kind === 'upload' && (
           <Stack spacing={1} sx={{ mt: 1, minWidth: 0 }}>
             <Alert severity="info" variant="outlined">
-              Uploading {dialog.files.length} selected file{dialog.files.length === 1 ? '' : 's'} to <Box component="span" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{destinationPath || 'the current remote directory'}</Box>.
+              Uploading {dialog.files.length} selected file{dialog.files.length === 1 ? '' : 's'} to <Box component="span" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{destinationPath || 'the current remote directory'}</Box>.
             </Alert>
             <Box sx={{ maxHeight: 150, overflow: 'auto', border: '1px solid', borderColor: 'divider', p: 1, minWidth: 0 }}>
               {dialog.files.map((file) => (
@@ -2950,7 +2950,7 @@ function FileOperationDialog({
         {dialog.kind === 'compress' && (
           <Stack spacing={1.25} sx={{ mt: 1, minWidth: 0 }}>
             <Alert severity="info" variant="outlined">
-              ShellOrchestra will create an archive in <Box component="span" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{destinationPath || 'the current remote directory'}</Box>.
+              ShellOrchestra will create an archive in <Box component="span" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>{destinationPath || 'the current remote directory'}</Box>.
             </Alert>
             <DesktopAppTextField
               autoFocus
@@ -3221,8 +3221,8 @@ function PropertiesDialog({
             <Box sx={{ maxHeight: 320, overflow: 'auto', border: '1px solid', borderColor: 'divider' }}>
               {items.map((item) => (
                 <Box key={item.path} sx={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 110px', gap: 1, px: 1, py: 0.75, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)', '&:first-of-type': { borderTop: 0 } }}>
-                  <Typography variant="caption" noWrap title={item.path} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{item.name || item.path}</Typography>
-                  <Typography variant="caption" sx={{ textAlign: 'right', fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{formatBytesCompact(item.recursiveSize || item.size)}</Typography>
+                  <Typography variant="caption" noWrap title={item.path} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{item.name || item.path}</Typography>
+                  <Typography variant="caption" sx={{ textAlign: 'right', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{formatBytesCompact(item.recursiveSize || item.size)}</Typography>
                 </Box>
               ))}
             </Box>
@@ -3240,7 +3240,7 @@ function PropertyRow({ label, value, mono = false }: { label: string; value: str
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '128px minmax(0, 1fr)', gap: 1, alignItems: 'baseline' }}>
       <Typography variant="caption" color="text.secondary">{label}</Typography>
-      <Typography variant="caption" title={value} sx={{ fontFamily: mono ? 'JetBrains Mono, ui-monospace, monospace' : undefined, fontWeight: mono ? 700 : undefined, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
+      <Typography variant="caption" title={value} sx={{ fontFamily: mono ? 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' : undefined, fontWeight: mono ? 700 : undefined, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
     </Box>
   );
 }
@@ -3280,7 +3280,7 @@ function CopyablePropertyField({
           maxRows={multiline ? 3 : undefined}
           onChange={(event) => onChange?.(event.target.value)}
           slotProps={{ input: { readOnly: !editable } }}
-          sx={{ flex: 1, minWidth: 0, '& .MuiInputBase-input': { fontFamily: mono ? 'JetBrains Mono, ui-monospace, monospace' : undefined, fontWeight: mono ? 700 : undefined, fontSize: 12 } }}
+          sx={{ flex: 1, minWidth: 0, '& .MuiInputBase-input': { fontFamily: mono ? 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' : undefined, fontWeight: mono ? 700 : undefined, fontSize: 12 } }}
         />
         <DesktopAppIconButton size="small" aria-label={`Copy ${label}`} onClick={() => copyText(value)} disabled={!value}>
           <ContentCopyIcon fontSize="small" />

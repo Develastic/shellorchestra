@@ -368,7 +368,7 @@ export function EditorFramePage() {
         options={{
           readOnly,
           automaticLayout: true,
-          fontFamily: 'JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           fontSize,
           lineHeight: Math.max(18, Math.round(fontSize * 1.55)),
           links: false,

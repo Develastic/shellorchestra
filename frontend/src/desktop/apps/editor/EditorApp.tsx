@@ -45,7 +45,7 @@ import { EditorSandboxFrame, type EditorSandboxHandle } from './EditorSandboxFra
 import { DesktopAppButton, DesktopAppTextField } from '../app-framework/AppControls';
 import type { DesktopWindowCloseGuard } from '../closeGuard';
 
-const editorFont = 'JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+const editorFont = 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 const editableLimitBytes = 8 * 1024 * 1024;
 const readOnlyLimitBytes = 32 * 1024 * 1024;
 const editorMaxLineBytes = 64 * 1024;

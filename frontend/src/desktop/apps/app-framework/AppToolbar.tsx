@@ -79,7 +79,7 @@ export function DesktopAppToolbar({ actions, infoTitle, onInfo, rightSlot }: { a
                   <ListSubheader
                     key={`${action.id}-group`}
                     disableSticky
-                    sx={{ bgcolor: 'transparent', color: 'primary.main', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.9, lineHeight: 2.2, textTransform: 'uppercase' }}
+                    sx={{ bgcolor: 'transparent', color: 'primary.main', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.9, lineHeight: 2.2, textTransform: 'uppercase' }}
                   >
                     {actionGroupBoundaryLabel(overflowActions, action, index)}
                   </ListSubheader>
@@ -147,7 +147,7 @@ function ToolbarGroupBoundary({ action, actions, index }: { action: DesktopAppAc
             alignItems: 'center',
             minHeight: 28,
             color: 'primary.main',
-            fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+            fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
             fontSize: 10,
             fontWeight: 900,
             letterSpacing: 0.8,

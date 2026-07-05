@@ -207,7 +207,7 @@ export function ConnectionWatchApp({ server, status, windowState }: { server: Se
         />
       )}
     >
-      <Tabs data-testid="connection-watch-tabs" value={tab} onChange={(_, value) => setTab(value)} variant="fullWidth" sx={{ minHeight: 38, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.78)', '& .MuiTab-root': { minHeight: 38, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 } }}>
+      <Tabs data-testid="connection-watch-tabs" value={tab} onChange={(_, value) => setTab(value)} variant="fullWidth" sx={{ minHeight: 38, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.78)', '& .MuiTab-root': { minHeight: 38, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 } }}>
         {tabs.map((item) => <Tab key={item.id} value={item.id} label={`${item.label} (${tabCount(filtered, item.id)})`} />)}
       </Tabs>
       <Box
@@ -270,7 +270,7 @@ function ProcessSummaryBar({ entries, groupMode, onInspect, onGroupByProcess }: 
       }}
     >
       <Stack spacing={0.2} sx={{ minWidth: 0 }}>
-        <Typography variant="caption" sx={{ color: 'primary.main', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
+        <Typography variant="caption" sx={{ color: 'primary.main', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>
           Process summary
         </Typography>
         <Typography variant="caption" color="text.secondary" noWrap title={allMissing ? missingProcessExplanation : 'Top socket owners in the current tab and filter.'}>
@@ -354,7 +354,7 @@ function ConnectionGroupHeader({ group, mode }: { group: ConnectionWatchGroup; m
         bgcolor: 'rgba(0, 255, 65, 0.08)',
       }}
     >
-      <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, color: 'primary.main', textTransform: 'uppercase', letterSpacing: 0.6 }}>
+      <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, color: 'primary.main', textTransform: 'uppercase', letterSpacing: 0.6 }}>
         {group.label}
       </Typography>
       <Chip size="small" variant="outlined" label={`${group.rows.length} row${group.rows.length === 1 ? '' : 's'}`} sx={{ height: 22 }} />
@@ -618,8 +618,8 @@ function processTitle(row: NetworkConnectionEntry): string {
 function DetailFact({ label, value, title, valueTestId }: { label: string; value: string; title?: string; valueTestId?: string }) {
   return (
     <Box sx={{ display: 'grid', gridTemplateColumns: '150px minmax(0, 1fr)', gap: 1, alignItems: 'baseline' }}>
-      <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
-      <Typography data-testid={valueTestId} title={title || value} variant="body2" sx={{ color: 'text.primary', fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{value}</Typography>
+      <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
+      <Typography data-testid={valueTestId} title={title || value} variant="body2" sx={{ color: 'text.primary', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{value}</Typography>
     </Box>
   );
 }
@@ -629,7 +629,7 @@ function titleCase(value: string): string {
   return cleaned ? cleaned.slice(0, 1).toUpperCase() + cleaned.slice(1) : 'Unknown';
 }
 
-function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
+function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
 
 function SortableHeader({ children, sortKey, activeSort, onSort }: { children: string; sortKey: ConnectionWatchSortKey; activeSort: ConnectionWatchSort; onSort: (key: ConnectionWatchSortKey) => void }) {
   const direction = activeSort?.key === sortKey ? activeSort.direction : 'none';
@@ -663,10 +663,10 @@ function SortableHeader({ children, sortKey, activeSort, onSort }: { children: s
         '&:focus-visible': { outline: '2px solid rgba(114,255,112,0.8)', outlineOffset: 1 },
       }}
     >
-      <Typography variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{children}</Typography>
-      <Typography aria-hidden="true" variant="caption" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, color: active ? 'primary.main' : 'text.disabled', width: 12, textAlign: 'center' }}>{direction === 'asc' ? '▲' : direction === 'desc' ? '▼' : '↕'}</Typography>
+      <Typography variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{children}</Typography>
+      <Typography aria-hidden="true" variant="caption" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, color: active ? 'primary.main' : 'text.disabled', width: 12, textAlign: 'center' }}>{direction === 'asc' ? '▲' : direction === 'desc' ? '▼' : '↕'}</Typography>
     </Box>
   );
 }
 
-function Mono({ children, title, strong = false, testId }: { children: string; title?: string; strong?: boolean; testId?: string }) { return <Typography data-testid={testId} variant="caption" noWrap title={title || children} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
+function Mono({ children, title, strong = false, testId }: { children: string; title?: string; strong?: boolean; testId?: string }) { return <Typography data-testid={testId} variant="caption" noWrap title={title || children} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }

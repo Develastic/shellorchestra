@@ -518,7 +518,7 @@ export function LogEntryDetailsDialog({ open, selected, onClose }: { open: boole
             <LogDetailFact label="Source" value={selected?.unit || selected?.host || '—'} />
             <LogDetailFact label="Priority" value={selected?.priority || '—'} />
             <Box sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.72)', p: 1.25, minHeight: 96, maxHeight: '45vh', overflow: 'auto' }}>
-              <Typography component="pre" sx={{ m: 0, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{selected?.message || '—'}</Typography>
+              <Typography component="pre" sx={{ m: 0, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{selected?.message || '—'}</Typography>
             </Box>
           </Stack>
         </DialogContent>
@@ -636,14 +636,14 @@ function safeDownloadName(value: string): string {
   return candidate && candidate !== '.' && candidate !== '..' ? candidate : 'shellorchestra-logs.log';
 }
 
-function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
+function Header({ children }: { children: string }) { return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>; }
 function Mono({ children, title }: { children: string; title?: string }) {
   return (
     <ClippedTitleTypography
       variant="caption"
       noWrap
       titleText={title || children}
-      sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 500 }}
+      sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 500 }}
     >
       {children}
     </ClippedTitleTypography>
@@ -666,7 +666,7 @@ function LogPriorityBadge({ value }: { value: string }) {
         borderColor: color,
         color,
         bgcolor: 'rgba(10,16,9,0.72)',
-        fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+        fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         fontWeight: 900,
         textTransform: 'uppercase',
         letterSpacing: 0.6,
@@ -681,8 +681,8 @@ function LogPriorityBadge({ value }: { value: string }) {
 function LogDetailFact({ label, value }: { label: string; value: string }) {
   return (
     <Box sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.54)', px: 1.25, py: 0.9 }}>
-      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
-      <Typography sx={{ mt: 0.35, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 13, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
+      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>
+      <Typography sx={{ mt: 0.35, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 13, overflowWrap: 'anywhere' }}>{value || '—'}</Typography>
     </Box>
   );
 }
@@ -693,7 +693,7 @@ function LogMessage({ children, title }: { children: string; title?: string }) {
       variant="caption"
       titleText={title || children}
       sx={{
-        fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+        fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         fontWeight: 500,
         whiteSpace: 'normal',
         overflowWrap: 'anywhere',

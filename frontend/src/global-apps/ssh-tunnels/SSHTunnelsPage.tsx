@@ -242,7 +242,7 @@ function StateBadge({ runtime }: { runtime: SSHTunnelRuntime }) {
         variant={runtime.state === 'running' ? 'filled' : 'outlined'}
         sx={{
           maxWidth: 112,
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           fontSize: 11,
           fontWeight: 800,
           textTransform: 'uppercase',
@@ -301,7 +301,7 @@ function selectedDestinationServerID(draft: TunnelDraft, servers: Server[]) {
   return servers.find((server) => server.host === host && (server.port || 22) === port)?.id ?? '';
 }
 
-function Mono({ children }: { children: React.ReactNode }) { return <Box component="span" sx={{ fontFamily: 'Iosevka Term, JetBrains Mono, ui-monospace, monospace' }}>{children}</Box>; }
+function Mono({ children }: { children: React.ReactNode }) { return <Box component="span" sx={{ fontFamily: 'Iosevka Term, Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{children}</Box>; }
 function displayTunnelText(value: string): string { return redactDebugScreenshotText(value); }
 
 function fromEndpoint(row: SSHTunnelRow) { const port = row.runtime.assigned_port || row.profile.bind_port; return `${row.profile.bind_address}:${port || 'auto'}`; }

@@ -43,7 +43,7 @@ export function EmbeddedVirtualDesktopPage() {
       <Box sx={{ height: '100vh', display: 'grid', placeItems: 'center', bgcolor: 'rgba(7,16,6,0.92)' }}>
         <Stack direction="row" spacing={1.25} sx={{ alignItems: 'center', p: 1.5, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.78)' }}>
           <CircularProgress size={18} />
-          <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>Loading embedded virtual desktop…</Typography>
+          <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>Loading embedded virtual desktop…</Typography>
         </Stack>
       </Box>
     );

@@ -354,7 +354,7 @@ function ContainerDetailsPanel({
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center', minWidth: 0 }}>
           <Box sx={{ minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>Selected container</Typography>
-            <Typography noWrap title={row.displayName} sx={{ fontWeight: 900, fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{row.displayName}</Typography>
+            <Typography noWrap title={row.displayName} sx={{ fontWeight: 900, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{row.displayName}</Typography>
           </Box>
         </Stack>
         <Divider />
@@ -415,7 +415,7 @@ function ContainerFact({ label, value, multiline = false }: { label: string; val
         title={value || '—'}
         sx={{
           display: 'block',
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           whiteSpace: multiline ? 'pre-wrap' : 'nowrap',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -453,8 +453,8 @@ function GenericRows({ kind, rows }: { kind: Exclude<ContainerTab, 'containers'>
   return <Box sx={{ flex: 1, minHeight: 0, overflow: 'auto', overscrollBehavior: 'contain' }}><HeaderRow headers={keys} columns={columns} />{rows.map((row, index) => <Box key={index} sx={{ display: 'grid', gridTemplateColumns: columns, gap: 1, px: 1, py: 0.75, borderTop: '1px solid', borderColor: 'rgba(132,150,126,0.18)' }}>{keys.map((key) => <Mono key={key} title={String(row[key] ?? '')}>{String(row[key] ?? '—')}</Mono>)}</Box>)}</Box>;
 }
 
-function HeaderRow({ headers, columns }: { headers: string[]; columns: string }) { return <Box sx={{ display: 'grid', gridTemplateColumns: columns, gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{headers.map((header) => <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{header}</Typography>)}</Box>; }
-function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
+function HeaderRow({ headers, columns }: { headers: string[]; columns: string }) { return <Box sx={{ display: 'grid', gridTemplateColumns: columns, gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{headers.map((header) => <Typography key={header} variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{header}</Typography>)}</Box>; }
+function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
 function containerActionDisabledReason(connectionState: ServerStatus['state'] | 'disconnected', engine: string, selected: ContainerEntry | null, busy: boolean) { if (connectionState !== 'connected') return containersConnectionMessage(connectionState); if (engine !== 'docker' && engine !== 'podman') return 'Docker or Podman was not detected on this server.'; if (busy) return 'A container operation is already running.'; if (!selected) return 'Select a container first.'; if (!selected.canRunAction()) return 'This container row does not expose a safe id or name.'; return ''; }
 function containerLogsDisabledReason(connectionState: ServerStatus['state'] | 'disconnected', engine: string, selected: ContainerEntry | null) { if (connectionState !== 'connected') return containersConnectionMessage(connectionState); if (engine !== 'docker' && engine !== 'podman') return 'Docker or Podman was not detected on this server.'; if (!selected) return 'Select a container first.'; if (!selected.canRunAction()) return 'This container row does not expose a safe id or name.'; return ''; }
 function containerInspectDisabledReason(connectionState: ServerStatus['state'] | 'disconnected', engine: string, selected: ContainerEntry | null) { if (connectionState !== 'connected') return containersConnectionMessage(connectionState); if (engine !== 'docker' && engine !== 'podman') return 'Docker or Podman was not detected on this server.'; if (!selected) return 'Select a container first.'; if (!selected.canRunAction()) return 'This container row does not expose a safe id or name.'; return ''; }

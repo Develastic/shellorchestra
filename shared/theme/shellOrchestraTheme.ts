@@ -29,10 +29,10 @@ export const shellOrchestraColors = {
 } as const;
 
 export const shellOrchestraFonts = {
-  appFontFamily: ['IBM Plex Sans', 'Inter', 'system-ui', 'sans-serif'].join(','),
-  marketingFontFamily: 'var(--font-ibm), system-ui, sans-serif',
-  monoFontFamily: ['"Iosevka"', '"Iosevka Term"', '"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'].join(','),
-  marketingMonoFontFamily: 'var(--font-mono), ui-monospace, monospace',
+  appFontFamily: ['"Segoe UI"', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
+  marketingFontFamily: 'var(--font-ui), "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif',
+  monoFontFamily: ['"Iosevka"', '"Iosevka Term"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'].join(','),
+  marketingMonoFontFamily: 'var(--font-mono), "Iosevka", "Iosevka Term", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
 } as const;
 
 export const shellOrchestraAppThemeOptions = {
@@ -92,11 +92,11 @@ export const shellOrchestraAppThemeOptions = {
       fontWeight: 800,
     },
     button: {
-      fontFamily: shellOrchestraFonts.monoFontFamily,
+      fontFamily: shellOrchestraFonts.appFontFamily,
       fontWeight: 800,
-      letterSpacing: '0.08em',
-      textTransform: 'uppercase',
-      fontSize: '0.72rem',
+      letterSpacing: '0.015em',
+      textTransform: 'none',
+      fontSize: '0.86rem',
     },
     caption: {
       fontFamily: shellOrchestraFonts.monoFontFamily,
@@ -305,9 +305,9 @@ export const shellOrchestraMarketingThemeOptions = {
     h2: { fontWeight: 700, letterSpacing: '-0.04em' },
     h3: { fontWeight: 700, letterSpacing: '-0.03em' },
     button: {
-      fontFamily: shellOrchestraFonts.marketingMonoFontFamily,
+      fontFamily: shellOrchestraFonts.marketingFontFamily,
       fontWeight: 800,
-      letterSpacing: '0.04em',
+      letterSpacing: '0.015em',
     },
   },
   components: {

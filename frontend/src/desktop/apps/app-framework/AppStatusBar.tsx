@@ -155,10 +155,10 @@ function StatusItem({ item }: { item: DesktopAppStatusItem }) {
         </Box>
       ) : (
         <>
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontSize: 10, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, lineHeight: 1.05, textTransform: 'uppercase', letterSpacing: 0.4 }} noWrap>
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontSize: 10, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, lineHeight: 1.05, textTransform: 'uppercase', letterSpacing: 0.4 }} noWrap>
             {item.label}
           </Typography>
-          <Typography variant="caption" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, lineHeight: 1.25 }} noWrap>
+          <Typography variant="caption" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, lineHeight: 1.25 }} noWrap>
             {item.value}
           </Typography>
         </>

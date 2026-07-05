@@ -278,7 +278,7 @@ function FirewallActionPreview({ draft, validation }: { draft: FirewallActionDra
         <Stack spacing={0.5}>
           <Typography component="span" sx={{ fontWeight: 900 }}>Read-only preview. No firewall script has been run yet.</Typography>
           <Typography component="span">After confirmation ShellOrchestra will run exactly this selected action through the detected firewall backend.</Typography>
-          <Typography component="code" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, wordBreak: 'break-word' }}>
+          <Typography component="code" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, wordBreak: 'break-word' }}>
             firewall_action=add_rule · firewall_rule={draft.rule}
           </Typography>
         </Stack>
@@ -290,7 +290,7 @@ function FirewallActionPreview({ draft, validation }: { draft: FirewallActionDra
       <Alert data-testid="firewall-action-preview" severity="warning" variant="outlined">
         <Stack spacing={0.5}>
           <Typography component="span" sx={{ fontWeight: 900 }}>Read-only preview. No firewall script has been run yet.</Typography>
-          <Typography component="code" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, wordBreak: 'break-word' }}>
+          <Typography component="code" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, wordBreak: 'break-word' }}>
             firewall_action=delete_rule · identifier={draft.ruleNumber}
           </Typography>
         </Stack>
@@ -332,7 +332,7 @@ function TextPanel({ testID, title, text }: { testID: string; title: string; tex
   return (
     <Box data-testid={testID} sx={{ minHeight: 0, overflow: 'auto', border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.62)' }}>
       <Typography variant="caption" color="text.secondary" sx={{ display: 'block', p: 1, pb: 0.5, fontWeight: 900, letterSpacing: 0.8 }}>{title}</Typography>
-      <Typography component="pre" sx={{ m: 0, p: 1, pt: 0, whiteSpace: 'pre-wrap', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>{text}</Typography>
+      <Typography component="pre" sx={{ m: 0, p: 1, pt: 0, whiteSpace: 'pre-wrap', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>{text}</Typography>
     </Box>
   );
 }
@@ -353,7 +353,7 @@ function RulesPanel({ payload }: { payload: FirewallPayload }) {
               border: '1px solid',
               borderColor: 'divider',
               bgcolor: 'rgba(15,21,14,0.74)',
-              fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+              fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
               fontSize: 12,
               '& > *': {
                 minWidth: 0,
@@ -381,7 +381,7 @@ function RulesPanel({ payload }: { payload: FirewallPayload }) {
       {rows.length > 0 && (
         <Typography variant="caption" color="text.secondary" sx={{ display: 'block', px: 1, pt: 0.75, fontWeight: 800, letterSpacing: 0.6 }}>Raw backend output</Typography>
       )}
-      <Typography component="pre" sx={{ m: 0, p: 1, pt: rows.length > 0 ? 0.5 : 0, whiteSpace: 'pre-wrap', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>{rawText}</Typography>
+      <Typography component="pre" sx={{ m: 0, p: 1, pt: rows.length > 0 ? 0.5 : 0, whiteSpace: 'pre-wrap', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>{rawText}</Typography>
     </Box>
   );
 }

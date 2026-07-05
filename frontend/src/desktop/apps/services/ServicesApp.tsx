@@ -215,7 +215,7 @@ export function ServicesApp({ server, status, windowState }: { server: Server; s
           <Box data-testid="services-logs-preview-panel" sx={{ minHeight: 0, display: 'flex', flexDirection: 'column', border: '1px solid', borderColor: 'rgba(132,150,126,0.34)', bgcolor: 'rgba(10,16,9,0.54)' }}>
             <Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', px: 1, py: 0.75, borderBottom: '1px solid', borderColor: 'divider' }}>
               <Box sx={{ minWidth: 0 }}>
-                <Typography variant="caption" color="primary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, letterSpacing: 0.6, textTransform: 'uppercase' }}>Logs preview</Typography>
+                <Typography variant="caption" color="primary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, letterSpacing: 0.6, textTransform: 'uppercase' }}>Logs preview</Typography>
                 <Typography variant="caption" color="text.secondary" noWrap title={logsUnit}>Recent journal entries for {logsUnit || 'selected service'}</Typography>
               </Box>
               <DesktopAppButton size="small" variant="outlined" onClick={() => setLogsOpen(false)} sx={{ minHeight: 30 }}>Close</DesktopAppButton>
@@ -249,7 +249,7 @@ function HeaderRow() {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   if (mobile) return null;
-  return <Box sx={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 1.2fr) 90px 90px minmax(260px, 2fr)', gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{['Service','Active','Sub','Description'].map((h) => <Typography key={h} variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{h}</Typography>)}</Box>;
+  return <Box sx={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 1.2fr) 90px 90px minmax(260px, 2fr)', gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{['Service','Active','Sub','Description'].map((h) => <Typography key={h} variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{h}</Typography>)}</Box>;
 }
 const servicesDialogPaperSx = {
   bgcolor: 'rgba(15,21,14,0.98)',
@@ -286,7 +286,7 @@ function ServiceRow({ unit, active, onSelect }: { unit: ServiceUnit; active: boo
             <Mono strong title={unit.name}>{unit.displayName}</Mono>
             <Chip size="small" color={unit.active === 'active' ? 'success' : 'default'} label={unit.active || '—'} />
           </Stack>
-          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>Sub: {unit.sub || '—'}</Typography>
+          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>Sub: {unit.sub || '—'}</Typography>
           <Typography variant="caption" color="text.secondary" sx={{ overflowWrap: 'anywhere' }}>{unit.description || '—'}</Typography>
         </Stack>
       </Box>
@@ -300,7 +300,7 @@ function ServiceDetailsPanel({ unit, details, loading }: { unit: ServiceUnit; de
     <Box data-testid="services-details-panel" sx={{ minHeight: 0, overflow: 'auto', border: '1px solid', borderColor: 'rgba(132,150,126,0.34)', bgcolor: 'rgba(10,16,9,0.54)' }}>
       <Stack spacing={1} sx={{ p: 1 }}>
         <Box>
-          <Typography variant="caption" color="primary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, letterSpacing: 0.6, textTransform: 'uppercase' }}>Service details</Typography>
+          <Typography variant="caption" color="primary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, letterSpacing: 0.6, textTransform: 'uppercase' }}>Service details</Typography>
           <Typography variant="body2" sx={{ fontWeight: 900, overflowWrap: 'anywhere' }}>{unit.displayName}</Typography>
           {loading && <Typography variant="caption" color="text.secondary">Refreshing details from the service manager…</Typography>}
         </Box>
@@ -313,7 +313,7 @@ function ServiceDetailsPanel({ unit, details, loading }: { unit: ServiceUnit; de
         <AppFact label="Active since" value={details?.activeEnterTimestamp || '—'} />
         {details?.statusText && (
           <Box sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.72)', p: 1, minHeight: 96, maxHeight: 220, overflow: 'auto' }}>
-            <Typography component="pre" sx={{ m: 0, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{details.statusText}</Typography>
+            <Typography component="pre" sx={{ m: 0, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{details.statusText}</Typography>
           </Box>
         )}
       </Stack>
@@ -321,7 +321,7 @@ function ServiceDetailsPanel({ unit, details, loading }: { unit: ServiceUnit; de
   );
 }
 
-function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
+function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
 
 function serviceActionDisabledReason(connected: boolean, selected: ServiceUnit | null, manager: string) {
   if (!connected) return 'Connect to the server first.';

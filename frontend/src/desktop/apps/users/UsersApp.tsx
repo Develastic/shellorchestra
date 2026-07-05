@@ -263,8 +263,8 @@ function SSHKeyRemoveDialog({ open, selected, sshKey, pending, onClose, onConfir
           </Alert>
           <AppFact label="Selected user" value={selected?.name ?? '—'} />
           <Box>
-            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>Key to remove</Typography>
-            <Typography component="pre" sx={{ mt: 0.5, m: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, color: 'text.primary', bgcolor: 'rgba(15,21,14,0.72)', border: '1px solid', borderColor: 'rgba(132,150,126,0.22)', p: 1 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'block', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>Key to remove</Typography>
+            <Typography component="pre" sx={{ mt: 0.5, m: 0, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, color: 'text.primary', bgcolor: 'rgba(15,21,14,0.72)', border: '1px solid', borderColor: 'rgba(132,150,126,0.22)', p: 1 }}>
               {sshKey || '—'}
             </Typography>
           </Box>
@@ -279,7 +279,7 @@ function SSHKeyRemoveDialog({ open, selected, sshKey, pending, onClose, onConfir
 }
 
 function HeaderRow() {
-  return <Box role="row" sx={{ display: { xs: 'none', sm: 'grid' }, gridTemplateColumns: 'minmax(160px, 1fr) 120px 150px 140px minmax(180px, 1fr)', gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{['User','UID/SID','Account type','Password login','Home / profile'].map((label) => <Typography key={label} role="columnheader" variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>)}</Box>;
+  return <Box role="row" sx={{ display: { xs: 'none', sm: 'grid' }, gridTemplateColumns: 'minmax(160px, 1fr) 120px 150px 140px minmax(180px, 1fr)', gap: 1, px: 1, py: 0.75, position: 'sticky', top: 0, zIndex: 1, bgcolor: 'rgba(15,21,14,0.96)', borderBottom: '1px solid', borderColor: 'divider' }}>{['User','UID/SID','Account type','Password login','Home / profile'].map((label) => <Typography key={label} role="columnheader" variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{label}</Typography>)}</Box>;
 }
 
 function UserRow({
@@ -351,7 +351,7 @@ function UserDetails({ user, canManage, sessions }: { user: UserAccount | null; 
         <UserAvatar user={user} size={52} />
         <Box sx={{ minWidth: 0 }}>
           <Typography sx={{ fontWeight: 900 }} noWrap>{user.displayName()}</Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{user.name}</Typography>
+          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{user.name}</Typography>
         </Box>
       </Stack>
       <Detail label="Account type" value={user.accountTypeLabel()} />
@@ -513,6 +513,6 @@ function selectedActionDisabledReason(connected: boolean, canManage: boolean, se
 }
 function dialogTitle(action: UserAction | null) { if (action === 'create') return 'Create local user'; if (action === 'edit') return 'Edit user'; if (action === 'set_password') return 'Set user password'; if (action === 'lock') return 'Disable password login'; if (action === 'unlock') return 'Enable password login'; if (action === 'set_admin') return 'Change administrator rights'; if (action === 'add_group') return 'Add user to group'; if (action === 'remove_group') return 'Remove user from group'; if (action === 'delete') return 'Delete user'; return 'User action'; }
 function dialogButton(action: UserAction | null) { if (action === 'create') return 'Create user'; if (action === 'edit') return 'Save changes'; if (action === 'set_password') return 'Set password'; if (action === 'lock') return 'Disable password login'; if (action === 'unlock') return 'Enable password login'; if (action === 'set_admin') return 'Save rights'; if (action === 'add_group') return 'Add to group'; if (action === 'remove_group') return 'Remove from group'; if (action === 'delete') return 'Delete user'; return 'Run'; }
-function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ display: 'block', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
-function Detail({ label, value }: { label: string; value: string }) { return <Box><Typography variant="caption" color="text.secondary">{label}</Typography><Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 800, overflowWrap: 'anywhere' }}>{value}</Typography></Box>; }
+function Mono({ children, title, strong = false }: { children: string; title?: string; strong?: boolean }) { return <Typography variant="caption" noWrap title={title || children} sx={{ display: 'block', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500 }}>{children}</Typography>; }
+function Detail({ label, value }: { label: string; value: string }) { return <Box><Typography variant="caption" color="text.secondary">{label}</Typography><Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 800, overflowWrap: 'anywhere' }}>{value}</Typography></Box>; }
 function UserAvatar({ user, size }: { user: UserAccount; size: number }) { return <Avatar sx={{ width: size, height: size, bgcolor: user.admin ? 'primary.dark' : 'rgba(132,150,126,0.22)', color: user.admin ? 'primary.contrastText' : 'primary.main', fontWeight: 900 }}>{(user.fullName || user.name).slice(0, 1).toUpperCase()}</Avatar>; }

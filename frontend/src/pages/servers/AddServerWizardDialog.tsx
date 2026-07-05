@@ -574,7 +574,7 @@ function ResultAlert({ result, error, verboseTitle = 'Diagnostic log' }: { resul
       {(result.verbose ?? []).length > 0 && (
         <Box sx={{ mt: 1 }}>
           <Typography variant="caption" sx={{ fontWeight: 800 }}>{verboseTitle}</Typography>
-          <Box component="pre" sx={{ whiteSpace: 'pre-wrap', overflowX: 'auto', mt: 0.5, mb: 0, fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{result.verbose?.join('\n')}</Box>
+          <Box component="pre" sx={{ whiteSpace: 'pre-wrap', overflowX: 'auto', mt: 0.5, mb: 0, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{result.verbose?.join('\n')}</Box>
         </Box>
       )}
     </Alert>
@@ -585,7 +585,7 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ alignItems: { xs: 'flex-start', sm: 'baseline' } }}>
       <Typography variant="body2" color="text.secondary" sx={{ minWidth: 168, fontWeight: 800 }}>{label}</Typography>
-      <Typography variant="body2" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', wordBreak: 'break-word' }}>{value}</Typography>
+      <Typography variant="body2" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', wordBreak: 'break-word' }}>{value}</Typography>
     </Stack>
   );
 }
@@ -837,7 +837,7 @@ function CommandBlock({
           maxHeight: collapsed ? 'calc(3 * 1.55em + 20px)' : 'min(42vh, 520px)',
           overflow: collapsed ? 'hidden' : 'auto',
           whiteSpace: 'pre',
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           fontSize: '0.82rem',
           lineHeight: 1.55,
           color: 'text.primary',

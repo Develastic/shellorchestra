@@ -146,7 +146,7 @@ export function CustomShortcutsApp({ server, status, openTerminalApp }: { server
                   >
                     <ListItemText
                       primary={<Typography variant="body2" noWrap sx={{ fontWeight: 900 }}>{shortcut.name}</Typography>}
-                      secondary={<Typography variant="caption" color="text.secondary" noWrap sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>{customShortcutSummary(shortcut)}</Typography>}
+                      secondary={<Typography variant="caption" color="text.secondary" noWrap sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>{customShortcutSummary(shortcut)}</Typography>}
                     />
                   </ListItemButton>
                 ))}
@@ -179,7 +179,7 @@ export function CustomShortcutsApp({ server, status, openTerminalApp }: { server
               maxRows={8}
               autoComplete="off"
               slotProps={{ htmlInput: { 'data-testid': 'custom-shortcuts-command-input' } }}
-              sx={{ '& textarea': { fontFamily: 'JetBrains Mono, ui-monospace, monospace' } }}
+              sx={{ '& textarea': { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' } }}
             />
             <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', alignItems: 'center' }}>
               <DesktopAppButton variant="contained" startIcon={<SaveIcon fontSize="small" />} disabled={!dirty || !validation.valid} onClick={saveDraft}>Save</DesktopAppButton>

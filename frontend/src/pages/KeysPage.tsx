@@ -444,7 +444,7 @@ function KeyChangeApprovalDialog({
               </Box>
               <Stack spacing={1} sx={{ minWidth: 0 }}>
                 <Typography variant="overline" color="text.secondary">Verification code</Typography>
-                <Typography sx={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '2rem', fontWeight: 900, letterSpacing: '0.14em' }}>
+                <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: '2rem', fontWeight: 900, letterSpacing: '0.14em' }}>
                   {code}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -553,11 +553,11 @@ function SSHCAInfoContent({ certTTLMinutes }: { certTTLMinutes: number }) {
       <Typography variant="subtitle2" sx={{ fontWeight: 900 }}>Why ShellOrchestra uses short-lived SSH certificates</Typography>
       <Typography variant="body2">
         Traditional SSH access usually means copying a permanent public key into
-        {' '}<Box component="span" sx={{ fontFamily: 'JetBrains Mono, monospace' }}>authorized_keys</Box> on every server. If that key later has to be rotated or removed, every server must be cleaned up.
+        {' '}<Box component="span" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>authorized_keys</Box> on every server. If that key later has to be rotated or removed, every server must be cleaned up.
       </Typography>
       <Typography variant="body2">
         ShellOrchestra uses a more advanced OpenSSH CA model instead. Servers trust this CA public key through
-        {' '}<Box component="span" sx={{ fontFamily: 'JetBrains Mono, monospace' }}>TrustedUserCAKeys</Box>. For each SSH connection, ShellOrchestra creates a fresh temporary client key and signs it as a short-lived SSH user certificate.
+        {' '}<Box component="span" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>TrustedUserCAKeys</Box>. For each SSH connection, ShellOrchestra creates a fresh temporary client key and signs it as a short-lived SSH user certificate.
       </Typography>
       <Typography variant="body2">
         That certificate is valid for about {certTTLMinutes} minute{certTTLMinutes === 1 ? '' : 's'}. The server accepts it only while it is signed by this CA and not expired. There is no permanent ShellOrchestra login key to leave behind on each managed server.
@@ -616,7 +616,7 @@ function CopyableTextField({
               </Button>
             </InputAdornment>
           ),
-          sx: monospace ? { fontFamily: 'JetBrains Mono, monospace' } : undefined,
+          sx: monospace ? { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' } : undefined,
         },
       }}
     />
@@ -701,7 +701,7 @@ function HeaderTabs<T extends string>({
               borderRight: '1px solid',
               borderColor: 'divider',
               color: 'text.secondary',
-              fontFamily: 'JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace',
+              fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
               fontSize: '0.72rem',
               fontWeight: 900,
               letterSpacing: '0.07em',
@@ -1102,7 +1102,7 @@ function VerifyInstallerDialog({
               bgcolor: 'background.default',
               '& .MuiTab-root': {
                 minHeight: 40,
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
                 fontSize: '0.72rem',
                 fontWeight: 900,
                 letterSpacing: '0.07em',
@@ -1219,7 +1219,7 @@ function ScriptPreview({ scriptText, helperKind }: { scriptText: string; helperK
         bgcolor: 'rgba(0,0,0,0.32)',
         border: '1px solid',
         borderColor: 'divider',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         fontSize: 12,
         lineHeight: 1.7,
         whiteSpace: 'pre-wrap',

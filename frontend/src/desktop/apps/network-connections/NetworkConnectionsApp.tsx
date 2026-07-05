@@ -175,7 +175,7 @@ export function NetworkConnectionsApp({ server, status, windowState }: { server:
           <DesktopAppTextField label={tab === 'routes' ? 'Filter routes' : 'Filter adapters'} value={filter} onChange={(event) => setFilter(event.target.value)} fullWidth slotProps={{ htmlInput: { 'data-testid': 'network-filter-input' } }} />
         </Box>
       </Collapse>
-      <Tabs data-testid="network-tabs" value={tab} onChange={(_, value) => setTab(value)} variant="fullWidth" sx={{ minHeight: 36, borderBottom: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.78)', '& .MuiTab-root': { minHeight: 36, fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 } }}>
+      <Tabs data-testid="network-tabs" value={tab} onChange={(_, value) => setTab(value)} variant="fullWidth" sx={{ minHeight: 36, borderBottom: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.78)', '& .MuiTab-root': { minHeight: 36, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 } }}>
         <Tab value="adapters" label="Adapters" data-testid="network-tab-adapters" />
         <Tab value="routes" label="Routes" data-testid="network-tab-routes" />
       </Tabs>
@@ -221,7 +221,7 @@ export function NetworkConnectionsApp({ server, status, windowState }: { server:
     </DesktopAppFrame>
   );
 }
-function AdapterRow({ adapter, active, onSelect }: { adapter: NetworkAdapter; active: boolean; onSelect: () => void }) { return <Box onClick={onSelect} data-testid="network-adapter-row" data-adapter-name={adapter.name} aria-selected={active} role="row" sx={{ p: 1, borderBottom: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: active ? 'rgba(114,255,112,0.10)' : 'transparent', cursor: 'pointer', '&:hover': { bgcolor: 'rgba(48,55,47,0.46)' } }}><Stack spacing={0.5}><Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', minWidth: 0 }}><Typography noWrap sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{adapter.name}</Typography><Chip size="small" color={adapter.state.toLowerCase().includes('up') ? 'success' : 'default'} label={adapter.stateLabel()} /></Stack><Typography variant="caption" color="text.secondary" noWrap>{adapter.type || 'adapter'} · {adapter.mac || 'no MAC'}</Typography><Typography variant="caption" color="text.secondary" noWrap>{redactDebugScreenshotText(adapter.addresses[0] || 'No address detected')}</Typography></Stack></Box>; }
+function AdapterRow({ adapter, active, onSelect }: { adapter: NetworkAdapter; active: boolean; onSelect: () => void }) { return <Box onClick={onSelect} data-testid="network-adapter-row" data-adapter-name={adapter.name} aria-selected={active} role="row" sx={{ p: 1, borderBottom: '1px solid', borderColor: 'rgba(132,150,126,0.18)', bgcolor: active ? 'rgba(114,255,112,0.10)' : 'transparent', cursor: 'pointer', '&:hover': { bgcolor: 'rgba(48,55,47,0.46)' } }}><Stack spacing={0.5}><Stack direction="row" spacing={1} sx={{ alignItems: 'center', justifyContent: 'space-between', minWidth: 0 }}><Typography noWrap sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{adapter.name}</Typography><Chip size="small" color={adapter.state.toLowerCase().includes('up') ? 'success' : 'default'} label={adapter.stateLabel()} /></Stack><Typography variant="caption" color="text.secondary" noWrap>{adapter.type || 'adapter'} · {adapter.mac || 'no MAC'}</Typography><Typography variant="caption" color="text.secondary" noWrap>{redactDebugScreenshotText(adapter.addresses[0] || 'No address detected')}</Typography></Stack></Box>; }
 function AdapterDetails({ adapter, dns, dnsSearchDomains, routes, sshPath, onCopy }: { adapter: NetworkAdapter | null; dns: string[]; dnsSearchDomains: string[]; routes: NetworkRouteCollection; sshPath: NetworkSshPath; onCopy: (value: string, label: string) => void }) {
   if (!adapter) return <Box data-testid="network-adapter-details" sx={{ p: 2, border: '1px solid', borderColor: 'divider' }}><Typography color="text.secondary">Select an adapter to view connection details.</Typography></Box>;
   const dnsText = dns.join(', ');
@@ -248,7 +248,7 @@ function AdapterDetails({ adapter, dns, dnsSearchDomains, routes, sshPath, onCop
               ? <Typography color="text.secondary">No IP addresses detected for this adapter.</Typography>
               : adapter.addresses.map((address) => (
                 <Box key={address} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, minWidth: 0 }}>
-                  <Chip label={redactDebugScreenshotText(address)} sx={{ maxWidth: '100%', alignSelf: 'flex-start', fontFamily: 'JetBrains Mono, ui-monospace, monospace', '& .MuiChip-label': { overflow: 'hidden', textOverflow: 'ellipsis' } }} />
+                  <Chip label={redactDebugScreenshotText(address)} sx={{ maxWidth: '100%', alignSelf: 'flex-start', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', '& .MuiChip-label': { overflow: 'hidden', textOverflow: 'ellipsis' } }} />
                   <CopyValueButton value={address} label="IP address" onCopy={onCopy} />
                 </Box>
               ))}
@@ -333,7 +333,7 @@ function RouteTableSection({ adapter, routes, dnsSearchDomains }: { adapter: Net
 
 function RouteCell({ children, header, title }: { children: string; header?: boolean; title?: string }) {
   return (
-    <Typography title={title || children} sx={{ px: 1, py: 0.65, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: header ? 900 : 700, color: header ? 'text.secondary' : 'text.primary', fontSize: header ? '0.72rem' : '0.78rem', textTransform: header ? 'uppercase' : 'none', letterSpacing: header ? 0.5 : 0 }}>
+    <Typography title={title || children} sx={{ px: 1, py: 0.65, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: header ? 900 : 700, color: header ? 'text.secondary' : 'text.primary', fontSize: header ? '0.72rem' : '0.78rem', textTransform: header ? 'uppercase' : 'none', letterSpacing: header ? 0.5 : 0 }}>
       {children}
     </Typography>
   );
@@ -401,7 +401,7 @@ function NetworkActionDialog({ action, adapter, hostname, mtu, dns, sshPath, pla
               color={scope.kind === 'persistent' ? 'success' : 'warning'}
               variant="outlined"
               label={scope.label}
-              sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase' }}
+              sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase' }}
             />
           </Stack>
         </DialogTitle>

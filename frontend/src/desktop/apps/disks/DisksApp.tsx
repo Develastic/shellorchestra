@@ -89,7 +89,7 @@ export function DisksApp({ server, status }: { server: Server; status?: ServerSt
         {data.isFetching && !payload && <Stack direction="row" spacing={1} sx={{ p: 2, alignItems: 'center' }}><CircularProgress size={18} /><Typography color="text.secondary">Loading disk inventory from this server…</Typography></Stack>}
         {payload && tab === 'block' && payload.rows.length > 0 && <DisksTable rows={payload.rows} onSelect={setSelectedRow} />}
         {payload && tab === 'block' && payload.rows.length === 0 && payload.missingUtilities.length > 0 && <MissingDiskUtilityPanel payload={payload} />}
-        {payload && tab === 'block' && payload.rows.length === 0 && payload.rawText && payload.missingUtilities.length === 0 && <Typography component="pre" sx={{ m: 0, p: 1.25, whiteSpace: 'pre-wrap', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12 }}>{payload.rawText}</Typography>}
+        {payload && tab === 'block' && payload.rows.length === 0 && payload.rawText && payload.missingUtilities.length === 0 && <Typography component="pre" sx={{ m: 0, p: 1.25, whiteSpace: 'pre-wrap', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12 }}>{payload.rawText}</Typography>}
         {payload && tab === 'block' && payload.rows.length === 0 && !payload.rawText && payload.missingUtilities.length === 0 && <Typography color="text.secondary" sx={{ p: 2 }}>No disk or partition rows were returned by the target platform tools.</Typography>}
         {payload && tab === 'lvm' && <LVMTable rows={payload.lvmRows} available={payload.lvmAvailable} platform={payload.platform} />}
         {!connected && !payload && <Typography color="text.secondary" sx={{ p: 2 }}>Connect to this server to inspect disks and partitions.</Typography>}
@@ -193,7 +193,7 @@ function DiskRowView({ row, onSelect }: { row: DiskRow; onSelect: (row: DiskRow)
 function DiskNameCell({ row }: { row: DiskRow }) {
   return (
     <Stack direction="row" spacing={0.75} title={row.name} sx={{ alignItems: 'center', minWidth: 0, pl: row.level * 2 }}>
-      {row.level > 0 && <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace' }}>↳</Typography>}
+      {row.level > 0 && <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' }}>↳</Typography>}
       <Box sx={{ flex: '0 0 auto', display: 'flex', color: diskIconColor(row), '& svg': { fontSize: 18 } }}>
         {iconForDiskRow(row)}
       </Box>
@@ -215,11 +215,11 @@ function diskIconColor(row: DiskRow) {
 }
 
 function Header({ children }: { children: ReactNode }) {
-  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
+  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.6 }}>{children}</Typography>;
 }
 
 function Mono({ children, title, strong = false, sx = {} }: { children: ReactNode; title?: string; strong?: boolean; sx?: SxProps<Theme> }) {
-  return <Typography variant="caption" noWrap title={title || (typeof children === 'string' ? children : undefined)} sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: strong ? 900 : 500, ...sx }}>{children}</Typography>;
+  return <Typography variant="caption" noWrap title={title || (typeof children === 'string' ? children : undefined)} sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: strong ? 900 : 500, ...sx }}>{children}</Typography>;
 }
 
 function DiskDetailsDialog({ row, onClose }: { row: DiskRow | null; onClose: () => void }) {
@@ -250,7 +250,7 @@ function Detail({ label, value }: { label: string; value: string }) {
   return (
     <>
       <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 900, textTransform: 'uppercase', letterSpacing: 0.7 }}>{label}</Typography>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>{value}</Typography>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>{value}</Typography>
     </>
   );
 }

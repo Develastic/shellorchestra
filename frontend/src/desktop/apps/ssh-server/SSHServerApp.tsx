@@ -394,7 +394,7 @@ function OptionsHeader() {
 function OptionCategoryHeader({ title }: { title: string }) {
   return (
     <Box sx={{ px: 0.75, py: 0.38, borderTop: '1px solid', borderBottom: '1px solid', borderColor: 'rgba(132,150,126,0.2)', bgcolor: 'rgba(0,255,65,0.055)' }}>
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 10, fontWeight: 900, color: 'primary.main', letterSpacing: 0.75, textTransform: 'uppercase' }}>{title}</Typography>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 10, fontWeight: 900, color: 'primary.main', letterSpacing: 0.75, textTransform: 'uppercase' }}>{title}</Typography>
     </Box>
   );
 }
@@ -505,7 +505,7 @@ function ConfigEditorTab({ payload, selectedPath, draft, dirty, onSelect, onDraf
             outline: 'none',
             bgcolor: 'rgba(10,16,9,0.78)',
             color: selected.editable ? 'text.primary' : 'text.disabled',
-            fontFamily: 'Iosevka Term, JetBrains Mono, ui-monospace, monospace',
+            fontFamily: 'Iosevka Term, Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
             fontSize: 12,
             lineHeight: 1.45,
             '&:focus': { borderColor: 'primary.main', boxShadow: '0 0 0 1px rgba(0,255,65,0.55)' },
@@ -590,7 +590,7 @@ function MatchEditDialog({ row, condition, body, onCondition, onBody, onClose, o
           <Alert severity="warning" variant="outlined">ShellOrchestra will not guess Match semantics. Review the text, then validate the full OpenSSH config before saving.</Alert>
           <AppFact label="Source" value={row?.locationLabel || '—'} />
           <DesktopAppTextField label="Match condition" value={condition} onChange={(event) => onCondition(event.target.value)} fullWidth />
-          <DesktopAppTextField multiline minRows={10} label="Match body" value={body} onChange={(event) => onBody(event.target.value)} fullWidth sx={{ '& textarea': { fontFamily: 'Iosevka Term, JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.45 } }} />
+          <DesktopAppTextField multiline minRows={10} label="Match body" value={body} onChange={(event) => onBody(event.target.value)} fullWidth sx={{ '& textarea': { fontFamily: 'Iosevka Term, Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.45 } }} />
         </Stack>
       </DialogContent>
       <DialogActions>
@@ -701,7 +701,7 @@ function TextList({ values, empty }: { values: string[]; empty: string }) {
 
 function CodeBlock({ value }: { value: string }) {
   return (
-    <Typography component="pre" sx={{ m: 0, p: 1, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka Term, JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.45, color: 'text.primary' }}>
+    <Typography component="pre" sx={{ m: 0, p: 1, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', fontFamily: 'Iosevka Term, Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.45, color: 'text.primary' }}>
       {value}
     </Typography>
   );
@@ -711,17 +711,17 @@ function SectionTitle({ title }: { title: string }) {
   return (
     <>
       <Divider />
-      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 11, fontWeight: 900, color: 'primary.main', letterSpacing: 0.8, textTransform: 'uppercase' }}>{title}</Typography>
+      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 11, fontWeight: 900, color: 'primary.main', letterSpacing: 0.8, textTransform: 'uppercase' }}>{title}</Typography>
     </>
   );
 }
 
 function Header({ children }: { children?: string }) {
-  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.7, textTransform: 'uppercase' }}>{children}</Typography>;
+  return <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 10, fontWeight: 900, letterSpacing: 0.7, textTransform: 'uppercase' }}>{children}</Typography>;
 }
 
 function Mono({ children, strong = false, title }: { children: string; strong?: boolean; title?: string }) {
-  return <Typography title={title || children} sx={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'Iosevka Term, JetBrains Mono, ui-monospace, monospace', fontSize: 12, fontWeight: strong ? 900 : 650 }}>{children}</Typography>;
+  return <Typography title={title || children} sx={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontFamily: 'Iosevka Term, Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, fontWeight: strong ? 900 : 650 }}>{children}</Typography>;
 }
 
 function severityIcon(severity: SSHServerSeverity) {

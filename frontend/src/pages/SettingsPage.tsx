@@ -360,11 +360,11 @@ export function SettingsPage() {
               <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: { xs: '1fr', md: 'repeat(2, minmax(0, 1fr))' } }}>
                 <Box sx={{ p: 1.25, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.52)' }}>
                   <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>Date and time example</Typography>
-                  <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{previewDate}</Typography>
+                  <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{previewDate}</Typography>
                 </Box>
                 <Box sx={{ p: 1.25, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.52)' }}>
                   <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>Number example</Typography>
-                  <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>{previewNumber}</Typography>
+                  <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>{previewNumber}</Typography>
                 </Box>
               </Box>
               <Button variant="contained" disabled={!localeHasChanges || saveDisabled} onClick={() => saveSettings.mutate({ wallpaperOverridden: current.wallpaper_overridden })} sx={{ alignSelf: { xs: 'stretch', sm: 'flex-start' } }}>
@@ -771,7 +771,7 @@ export function SettingsPage() {
                     </Button>
                     <Box sx={{ p: 1.25, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(15,21,14,0.72)', minHeight: 50 }}>
                       <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>Selected file</Typography>
-                      <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
+                      <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900, overflowWrap: 'anywhere' }}>
                         {selectedDesktopWallpaperFile ? selectedDesktopWallpaperFile.name : 'No file selected'}
                       </Typography>
                     </Box>
@@ -798,7 +798,7 @@ export function SettingsPage() {
               )}
               <Box sx={{ p: 1.25, border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.46)' }}>
                 <Typography variant="caption" color="primary" sx={{ display: 'block', fontWeight: 900, letterSpacing: '0.08em' }}>LIBRARY STATUS</Typography>
-                <Typography sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontWeight: 900 }}>
+                <Typography sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontWeight: 900 }}>
                   {desktopWallpapers.data?.length ?? 0} custom wallpapers
                 </Typography>
                 <Typography variant="body2" color="text.secondary">

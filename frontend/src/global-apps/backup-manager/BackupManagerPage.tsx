@@ -164,7 +164,7 @@ export function BackupManagerPage() {
     <Box sx={{ p: { xs: 2, md: 3 }, display: 'flex', flexDirection: 'column', gap: 2 }}>
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ alignItems: { md: 'flex-end' }, justifyContent: 'space-between' }}>
         <Box>
-          <Typography variant="h4" sx={{ fontFamily: 'IBM Plex Sans, sans-serif', fontWeight: 800 }}>Backup Manager</Typography>
+          <Typography variant="h4" sx={{ fontFamily: 'Segoe UI, Inter, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Arial, sans-serif', fontWeight: 800 }}>Backup Manager</Typography>
           <Typography color="text.secondary">Create backup buckets, define source tasks, test excludes, and keep simple rotation rules visible.</Typography>
         </Box>
         <Stack direction="row" spacing={1}>

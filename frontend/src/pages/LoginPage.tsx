@@ -307,7 +307,7 @@ export function LoginPage() {
                               slotProps={{
                                 input: {
                                   readOnly: true,
-                                  sx: { fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: '0.82rem' },
+                                  sx: { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: '0.82rem' },
                                 },
                               }}
                               helperText="Use this link on the primary approval phone if QR scanning is not convenient."

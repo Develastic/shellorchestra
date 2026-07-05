@@ -373,7 +373,7 @@ function SudoVersionHistoryDialog({
                   <ListItemText
                     primary={`${version.role.replaceAll('_', ' ')} · ${formatBytesCompact(version.sizeBytes)}`}
                     secondary={`${version.createdLabel()} · ${version.actorLabel || 'ShellOrchestra'} · ${version.contentSHA256.slice(0, 12)}…`}
-                    slotProps={{ primary: { sx: { fontWeight: 800 } }, secondary: { sx: { fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 11 } } }}
+                    slotProps={{ primary: { sx: { fontWeight: 800 } }, secondary: { sx: { fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 11 } } }}
                   />
                 </ListItemButton>
               ))}
@@ -385,11 +385,11 @@ function SudoVersionHistoryDialog({
             {selectedError && <Alert severity="error">{selectedError.message}</Alert>}
             {selectedVersion && (
               <>
-                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>
+                <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>
                   {selectedVersion.role.replaceAll('_', ' ')} · {selectedVersion.createdLabel()} · {selectedVersion.contentSHA256}
                 </Typography>
                 <Divider />
-                <Box component="pre" sx={{ flex: 1, minHeight: 0, m: 0, p: 1.5, overflow: 'auto', border: '1px solid', borderColor: 'rgba(114,255,112,0.30)', bgcolor: '#0a1009', color: 'text.primary', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.55, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                <Box component="pre" sx={{ flex: 1, minHeight: 0, m: 0, p: 1.5, overflow: 'auto', border: '1px solid', borderColor: 'rgba(114,255,112,0.30)', bgcolor: '#0a1009', color: 'text.primary', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.55, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                   {selectedVersion.content.slice(0, 262144)}{selectedVersion.content.length > 262144 ? '\n\n… preview truncated in this dialog.' : ''}
                 </Box>
               </>
@@ -451,7 +451,7 @@ function SudoValidationFailurePreview({ content, output }: { content: string; ou
       <Box
         component="pre"
         data-testid="sudo-validation-output"
-        sx={{ m: 0, p: 1, maxHeight: 96, overflow: 'auto', border: '1px solid', borderColor: 'error.main', bgcolor: 'rgba(15,21,14,0.88)', color: 'error.light', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+        sx={{ m: 0, p: 1, maxHeight: 96, overflow: 'auto', border: '1px solid', borderColor: 'error.main', bgcolor: 'rgba(15,21,14,0.88)', color: 'error.light', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
       >
         {output || 'The target sudoers checker rejected this draft without additional output.'}
       </Box>
@@ -459,7 +459,7 @@ function SudoValidationFailurePreview({ content, output }: { content: string; ou
       <Box
         data-testid="sudo-validation-draft-preview"
         aria-label="Read-only sudoers draft preview with line numbers"
-        sx={{ maxHeight: 180, overflow: 'auto', border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.82)', fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: 12, lineHeight: 1.55 }}
+        sx={{ maxHeight: 180, overflow: 'auto', border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(10,16,9,0.82)', fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', fontSize: 12, lineHeight: 1.55 }}
       >
         {lines.map((line, index) => (
           <Box key={`${index}-${line}`} sx={{ display: 'grid', gridTemplateColumns: '44px minmax(0, 1fr)' }}>

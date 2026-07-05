@@ -662,7 +662,7 @@ function TargetsTab({
                   <Chip size="small" color={targetStateColor(target.state)} variant="outlined" label={stateLabel(target.state === 'queued' ? 'ready' : target.state)} />
                 </Stack>
                 {target.variant_selector_snapshot && Object.keys(target.variant_selector_snapshot).length > 0 && (
-                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5, fontFamily: 'JetBrains Mono, ui-monospace, monospace', overflowWrap: 'anywhere' }}>
+                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 0.5, fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', overflowWrap: 'anywhere' }}>
                     {variantSnapshotLabel(target.variant_selector_snapshot)}
                   </Typography>
                 )}
@@ -857,7 +857,7 @@ function BatchScriptCodeEditor({
         options={{
           readOnly,
           minimap: { enabled: false },
-          fontFamily: 'JetBrains Mono, ui-monospace, monospace',
+          fontFamily: 'Iosevka, Iosevka Term, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
           fontSize: 13,
           lineHeight: 20,
           scrollBeyondLastLine: false,

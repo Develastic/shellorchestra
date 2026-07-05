@@ -123,7 +123,7 @@
 .desktop-unsaved-close-title {
   margin: 0 0 14px;
   color: #ebffe2;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: 'Segoe UI', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
@@ -140,7 +140,7 @@
   border-radius: 4px;
   background: rgba(255, 179, 0, 0.14);
   color: #dee5d9;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: 'Segoe UI', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
 }
@@ -154,7 +154,7 @@
 .desktop-unsaved-close-details {
   margin: 0 0 10px;
   color: #dee5d9;
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-family: 'Segoe UI', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
 }
@@ -162,7 +162,7 @@
 .desktop-unsaved-close-window {
   margin: 0 0 18px;
   color: #b9ccb2;
-  font-family: var(--font-mono, ui-monospace, monospace);
+  font-family: var(--font-mono, 'Iosevka', 'Iosevka Term', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 12px;
   line-height: 16px;
 }
@@ -178,7 +178,7 @@
   min-height: 32px;
   border-radius: 3px;
   padding: 0 14px;
-  font-family: var(--font-mono, ui-monospace, monospace);
+  font-family: var(--font-mono, 'Iosevka', 'Iosevka Term', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-size: 11px;
   line-height: 16px;
   font-weight: 700;
