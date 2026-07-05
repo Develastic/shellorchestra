@@ -61,7 +61,7 @@ Run this on the Linux controller host that will run ShellOrchestra:
 curl -fsSL https://shellorchestra.com/install/docker-install.sh | sudo sh
 ```
 
-The official installer expects Docker Engine and Docker Compose to already be installed. It verifies the signed alpha release manifest and Docker artifact before creating the managed `/opt/shellorchestra` layout and starting the Docker Compose stack.
+The official installer expects a Linux host with Docker Engine and Docker Compose already installed. It follows the server-declared mainstream signed release manifest, verifies the Docker artifact, creates the managed `/opt/shellorchestra` layout, and starts the Docker Compose stack. macOS Docker Desktop hosts should use the manual/offline Docker bundle runbook for now.
 
 ### Windows app preview
 
